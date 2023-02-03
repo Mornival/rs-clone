@@ -1,0 +1,51 @@
+.vacancies {
+    display: grid;
+    justify-content: space-evenly;
+    text-align: center;
+    grid-template-columns: repeat(auto-fit, minmax(auto, 20rem));
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+
+    &.active {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 1rem;
+        border: 1px solid var(--gray);
+        border-left-width: 1rem;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        transition: box-shadow 0.5s ease-in-out;
+        transition: transform 0.5s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 5px 11px rgb(0 0 0 / 20%);
+            transform: scale(1.1);
+        }
+    }
+
+    &__title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-align: center;
+        word-break: break-word;
+    }
+
+    &__btn {
+        border: 1px solid var(--black);
+        padding: 1rem;
+        margin: 0 auto;
+
+        &:disabled {
+            background-color: red;
+            cursor: not-allowed;
+        }
+    }
+}
