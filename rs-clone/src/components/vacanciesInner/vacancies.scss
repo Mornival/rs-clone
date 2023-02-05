@@ -81,7 +81,7 @@
     &__exemple {
         scroll-padding-top: 6.1rem;
         overflow-y: auto;
-        position: fixed;
+        position: absolute;
         font-size: 1.2rem;
         scroll-snap-type: y mandatory;
         max-height: 76%;

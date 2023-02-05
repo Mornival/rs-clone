@@ -13,6 +13,21 @@ body {
 	color: var(--black);
 }
 
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+.main {
+	flex: 1 0 auto;
+}
+
+.footer {
+	flex: 0 0 auto;
+}
+
 .container {
 	max-width: $cont_width + px;
 	margin: 0 auto;
