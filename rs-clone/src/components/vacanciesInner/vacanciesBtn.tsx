@@ -3,7 +3,7 @@ export const VacanciesBtn = (props: { clickBtnPages: () => void }) => {
 
     return (
         <button className="vacancies__btn btn" type="button" onClick={clickBtnPages} style={{ display: 'none' }}>
-            Еще вакансии
+            Обновить вакансии
         </button>
     );
 };
