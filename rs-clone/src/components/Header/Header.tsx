@@ -30,7 +30,7 @@ export function Header(){
 
     return(
         <header className="header">
-            <div className="header-wrapper">
+            <div className="header-wrapper container">
                 <div className="left-block">
                 <div className="block-logo">
                     <a className='logo-link' href="/"><img className='logo' src={logo} alt="logo" />
