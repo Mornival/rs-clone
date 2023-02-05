@@ -13,11 +13,14 @@ export const VacanciesCart: React.FC<{
 
     const [state, setState] = useState<Pick<IData, 'id' | 'name' | 'salary'>[]>([]);
 
+    let valid = true;
+
     async function getItems(value: number) {
         const BTN = document.querySelector('.vacancies__btn') as HTMLButtonElement;
         const BOX_VACANSIES = document.querySelector('.vacancies');
         if (btn) btn.disabled = true;
         if (BOX_VACANSIES) BOX_VACANSIES.classList.toggle('active', true);
+        valid = false;
         const { items } = await REQUEST(`area=113&per_page=${value}`);
         setState(items);
         if (btn) btn.disabled = false;
@@ -26,7 +29,7 @@ export const VacanciesCart: React.FC<{
     }
 
     useEffect(() => {
-        getItems(setPagesVacancies);
+        if (valid) getItems(setPagesVacancies);
     }, [setPagesVacancies]);
 
     const COLORS_VARIABLES = '0123456789ABCDF';

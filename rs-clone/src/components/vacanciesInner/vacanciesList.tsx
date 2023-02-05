@@ -20,7 +20,7 @@ export const VacanciesList: React.FC<Pick<IData, 'name'>> = (props) => {
 
     return (
         <div className="vacancies-list">
-            <p className='vacancies-list__text'>Вакансии:</p>
+            <p className="vacancies-list__text">Вакансии:</p>
             <ul className="vacancies-list__exemple">
                 {state.map(({ name, salary, id, area }) => (
                     <li className="vacancies-list__item" key={id}>
@@ -29,10 +29,8 @@ export const VacanciesList: React.FC<Pick<IData, 'name'>> = (props) => {
                             <p className="vacancies-list__area">Месторасположение: {area.name}</p>
                             <VacanciesSalary salary={salary} />
                         </div>
-                        <button className='vacancies-list__btn' type="button">
-                            {
-                                `>`
-                            }
+                        <button className="vacancies-list__btn" type="button">
+                            {`>`}
                         </button>
                     </li>
                 ))}

@@ -6,21 +6,17 @@ export const VacanciesAmount: React.FC<Pick<IData, 'name'>> = (props) => {
     const [state, setState] = useState<number>(0);
     const { name } = props;
 
+    let valid = true;
+
     const getVacancies = async () => {
-        const { found } = await REQUEST(`text=${name}`);
+        valid = false;
         const RESPONSE = await REQUEST(`text=${name}`);
-
-        // console.log('Response =>', RESPONSE);
-        console.log('found =>', found);
-
-        setState(found);
+        setState(RESPONSE.found);
     };
 
     useEffect(() => {
-        if (!state) {
-            getVacancies();
-        }
+        if (valid) getVacancies();
     }, []);
 
-    return <span>{`Вакансий найдено: ${state ? state : 0}`}</span>;
+    return <span>{`Вакансий найдено: ${state ? state : 'Загружается'}`}</span>;
 };
