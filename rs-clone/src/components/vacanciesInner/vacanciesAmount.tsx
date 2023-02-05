@@ -11,7 +11,11 @@ export const VacanciesAmount: React.FC<Pick<IData, 'name'>> = (props) => {
     const getVacancies = async () => {
         valid = false;
         const RESPONSE = await REQUEST(`text=${name}`);
-        setState(RESPONSE.found);
+
+        // console.log('Response =>', RESPONSE);
+        // console.log('found =>', found);
+
+        setState(found);
     };
 
     useEffect(() => {

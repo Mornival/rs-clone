@@ -4,6 +4,7 @@ import { VacanciesSalary } from './vacanciesSalary';
 import { VacanciesAmount } from './vacanciesAmount';
 import { useEffect, useState } from 'react';
 
+
 export const VacanciesCart: React.FC<{
     setPagesVacancies: number;
     btn: undefined | HTMLButtonElement;
@@ -50,7 +51,7 @@ export const VacanciesCart: React.FC<{
                 <li
                     className="vacancies__inner"
                     key={id}
-                    style={{ borderLeftColor: getRandomColor() }}
+                    style={{ borderLeftColor: getRandomColor()}}
                     onClick={() => getNameVacanciesHandler(name)}
                 >
                     <h2 className="vacancies__title">{name}</h2>
