@@ -31,7 +31,7 @@ export function Header(){
                 <div className="left-block">
                 <div className="block-logo">
                     <a className='logo-link' href="/"><img className='logo' src={logo} alt="logo" />
-                        <div className="logo-text">rabota.by</div>
+                        <div className="logo-text">hh.ru</div>
                     </a>
                 </div>
                 <div className="help"><p>Помощь</p></div>
