@@ -15,13 +15,13 @@ export const VacanciesCart: React.FC<{
 
     let valid = true;
 
-    async function getItems(value: number) {
+    async function getItems() {
         const BTN = document.querySelector('.vacancies__btn') as HTMLButtonElement;
         const BOX_VACANSIES = document.querySelector('.vacancies');
         if (btn) btn.disabled = true;
         if (BOX_VACANSIES) BOX_VACANSIES.classList.toggle('active', true);
         valid = false;
-        const { items } = await REQUEST(`area=113&per_page=${value}`);
+        const { items } = await REQUEST(`area=113&per_page=30`);
         setState(items);
         if (btn) btn.disabled = false;
         if (BOX_VACANSIES) BOX_VACANSIES.classList.toggle('active', false);
@@ -29,7 +29,7 @@ export const VacanciesCart: React.FC<{
     }
 
     useEffect(() => {
-        if (valid) getItems(setPagesVacancies);
+        if (valid) getItems();        
     }, [setPagesVacancies]);
 
     const COLORS_VARIABLES = '0123456789ABCDF';

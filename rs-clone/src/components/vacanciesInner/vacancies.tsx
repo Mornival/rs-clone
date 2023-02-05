@@ -5,19 +5,14 @@ import { useState } from 'react';
 import './vacancies.scss';
 
 export const Vacancies = () => {
-    const [state, setState] = useState(20);
+    const [state, setState] = useState(0);
     const [stateBtn, setStateBtn] = useState();
     const [stateName, setStateName] = useState('');
 
     function getPagesHandler() {
         const { target } = arguments[0];
         setStateBtn(target);
-
-        setState((prev) => {
-            prev += 20;
-            if (prev >= 100) return 100;
-            return prev;
-        });
+        setState((prev) => ++prev);
     }
 
     const getVacanciesName = (props: string) => setStateName(props);
