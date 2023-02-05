@@ -4,6 +4,8 @@ import logo from './img/logo.png'
 import loupeimg from './img/loupe.png'
 import filter from './img/filter.png'
 
+
+
 export function Header(){
     const blockSearch = document.querySelector('.block-search')
     const tringle = document.querySelector('.tringle')
@@ -20,7 +22,6 @@ export function Header(){
             searchBtn?.classList.toggle('hide');
             btnsearch?.classList.toggle('hide');
             filtersearch?.classList.toggle('hide');
-            
             
     }
 
@@ -59,7 +60,7 @@ export function Header(){
                     </button>
                 </div>
             </div>
-           
+            
         </header>
     )
 }
