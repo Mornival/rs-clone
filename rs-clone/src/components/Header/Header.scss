@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+   
 }
 .left-block {
     display: flex;
@@ -97,26 +98,39 @@ a.login:hover {
 .tringle {
     position: absolute;
     left: 3px;
-    top: 55px;
+    top: 41px;
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 0 8px 8px 8px;
     border-color: transparent transparent #edeff0 transparent;
-    transition: top 0.3s 0.3s;
+    transition: 0.1s linear;
+    z-index: 2;
+}
+.tringle-white {
+    border-color: white;
 }
 
 
 //block search
+
 .block-search {
+    height: 80px;
     transition: top 0.3s 0.3s;
     background-color: #edeff0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem 0;
+    // transition:  .05s linear;
 }
-
+.block-search-hiden {
+    height: 0px;
+    padding: 0;
+}
+.hide {
+    display: none;
+}
 .search-wrapper {
     display: flex;
 }
@@ -128,6 +142,7 @@ a.login:hover {
     padding: 0 12px;
     border-radius: 7px;
     background-color: #fff;
+    transition: 0.1s linear;
 }
 .btn-search {
     height: 40px;
@@ -137,6 +152,7 @@ a.login:hover {
     border-radius: 7px;
     background-color: #1785e5;
     margin-left: 20px;
+    z-index: 3;
 }
 .btn-search:hover {
     background-color: #228be6;
@@ -160,4 +176,6 @@ a.login:hover {
 }
 .close-tringle {
     top: 75px;
+    transition: top .5s linear;
+    display: none;
 }
