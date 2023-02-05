@@ -1,18 +1,27 @@
-import React from 'react';
-import './App.scss';
 import { Vacancies } from './components/vacanciesInner/vacancies';
-import './scss/style.scss';
 import { Header } from './components/Header/Header';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { VacanciesPages } from './pages/vacancy';
 import { Footer } from './components/Footer/Footer';
 
-function App() {
+export function App() {
     return (
-        <div className="App">
-            <Header />
-            <Vacancies />
-            <Footer/>
-        </div>
+        <>
+            <Router>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <Header />
+                                <Vacancies />
+                                <Footer />
+                            </>
+                        }
+                    />
+                    <Route path="/vacancies" element={<VacanciesPages />} />
+                </Routes>
+            </Router>
+        </>
     );
 }
-
-export default App;

@@ -18,7 +18,7 @@ export const Vacancies = () => {
     const getVacanciesName = (props: string) => setStateName(props);
 
     return (
-        <div className="container">
+        <main className="main container">
             <div className="vacancies-wrapper">
                 <ul className="vacancies">
                     <VacanciesCart setPagesVacancies={state} btn={stateBtn} getVacanciesName={getVacanciesName} />
@@ -27,6 +27,6 @@ export const Vacancies = () => {
             </div>
 
             <VacanciesBtn clickBtnPages={getPagesHandler} />
-        </div>
+        </main>
     );
 };
