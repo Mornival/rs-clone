@@ -5,28 +5,24 @@ import loupeimg from './img/loupe.png'
 import filter from './img/filter.png'
 
 export function Header(){
-    const loupe = document.querySelector('.loupe')
     const blockSearch = document.querySelector('.block-search')
     const tringle = document.querySelector('.tringle')
+    const searchBtn = document.querySelector('.search-btn')
+    const btnsearch = document.querySelector('.btn-search')
+    const filtersearch = document.querySelector('.filter-search')
 
-    loupe?.addEventListener('click', ()=> {
-        console.log('hi');
-        
-        if (blockSearch?.className === 'block-search') {
-            blockSearch?.classList.add('close');
-            tringle?.classList.add('close-tringle');
-            console.log('hi');
+
+    function search(){
+            blockSearch?.classList.toggle('close');
+            tringle?.classList.toggle('close-tringle');  
+            tringle?.classList.toggle('tringle-white');  
+            blockSearch?.classList.toggle('block-search-hiden');
+            searchBtn?.classList.toggle('hide');
+            btnsearch?.classList.toggle('hide');
+            filtersearch?.classList.toggle('hide');
             
-        } else {
-            blockSearch?.classList.remove('close');
-            tringle?.classList.remove('close-tringle');
-        }
-            // blockSearch?.classList.toggle('close');
-            // tringle?.classList.toggle('close-tringle');
-            // console.log('hi');
             
-        
-    })
+    }
 
     return(
         <header className="header">
@@ -41,8 +37,8 @@ export function Header(){
                 </div>
                 <div className="rigth-block">
                     <div className="loupe">
-                        <img className='loupe-logo' src={loupeimg} alt="loupe logo" />
-                        <div className="tringle"></div>
+                        <img className='loupe-logo' onClick={search} src={loupeimg} alt="loupe logo" />
+                        <div className="tringle "></div>
                     </div>
                     <a href="/" className="add-resume">
                         <div className='btn-res' >Создать резюме</div>
@@ -54,7 +50,7 @@ export function Header(){
             </div>
             <div className="block-search">
                 <div className="search-wrapper">
-                    <div className="search">
+                    <div className="search search-btn">
                         <input className='search-inpute'  type="text" placeholder="Профессия, должность или компания"/>
                     </div>
                     <button className='btn-search'>Найти</button>

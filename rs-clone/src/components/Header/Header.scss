@@ -97,26 +97,39 @@ a.login:hover {
 .tringle {
     position: absolute;
     left: 3px;
-    top: 55px;
+    top: 41px;
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 0 8px 8px 8px;
     border-color: transparent transparent #edeff0 transparent;
-    transition: top 0.3s 0.3s;
+    transition: top .5s linear;
+    z-index: 2;
+}
+.tringle-white {
+    border-color: white;
 }
 
 
 //block search
+
 .block-search {
+    height: 80px;
     transition: top 0.3s 0.3s;
     background-color: #edeff0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem 0;
+    z-index: -1;
 }
-
+.block-search-hiden {
+    height: 0px;
+    padding: 0;
+}
+.hide {
+    display: none;
+}
 .search-wrapper {
     display: flex;
 }
@@ -137,6 +150,7 @@ a.login:hover {
     border-radius: 7px;
     background-color: #1785e5;
     margin-left: 20px;
+    z-index: 3;
 }
 .btn-search:hover {
     background-color: #228be6;
