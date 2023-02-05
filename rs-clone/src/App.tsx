@@ -2,15 +2,14 @@ import React from 'react';
 import './App.scss';
 import { Vacancies } from './components/vacanciesInner/vacancies';
 import './scss/style.scss';
+import { Header } from './components/Header/Header';
 
 function App() {
     return (
-        <>
-            <div className="App">
-                <h1>Hello RS-clone</h1>
-            </div>
+        <div className="App">
+            <Header />
             <Vacancies />
-        </>
+        </div>
     );
 }
 

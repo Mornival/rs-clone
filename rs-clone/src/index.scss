@@ -1,0 +1,22 @@
+html,
+body {
+	
+	min-height: 100vh;
+	font-family: Arial,sans-serif;
+    line-height: 1.43;
+    font-size: 14px;
+
+}
+#root {
+	min-height: 100vh;
+}
+.App {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+.container {
+	margin: 0 auto;
+	padding: 0 15px;
+	max-width: 1200px;
+}
