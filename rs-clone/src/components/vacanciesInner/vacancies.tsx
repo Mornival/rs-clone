@@ -1,11 +1,13 @@
 import { VacanciesCart } from './vacanciesCard';
 import { VacanciesBtn } from './vacanciesBtn';
+import { VacanciesList } from './vacanciesList';
 import { useState } from 'react';
 import './vacancies.scss';
 
 export const Vacancies = () => {
-    let [state, setState] = useState(20);
-    let [stateBtn, setStateBtn] = useState();
+    const [state, setState] = useState(20);
+    const [stateBtn, setStateBtn] = useState();
+    const [stateName, setStateName] = useState('');
 
     function getPagesHandler() {
         const { target } = arguments[0];
@@ -18,11 +20,17 @@ export const Vacancies = () => {
         });
     }
 
+    const getVacanciesName = (props: string) => setStateName(props);
+
     return (
         <div className="container">
-            <ul className="vacancies">
-                <VacanciesCart setPagesVacancies={state} btn={stateBtn} />
-            </ul>
+            <div className="vacancies-wrapper">
+                <ul className="vacancies">
+                    <VacanciesCart setPagesVacancies={state} btn={stateBtn} getVacanciesName={getVacanciesName} />
+                </ul>
+                <VacanciesList name={stateName} />
+            </div>
+
             <VacanciesBtn clickBtnPages={getPagesHandler} />
         </div>
     );

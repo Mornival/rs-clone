@@ -1,7 +1,7 @@
 import { IData } from '../../types/interfaces';
 import React from 'react';
 
-export const VacanciesSalary: React.FC<Pick<IData, 'salary' | 'name'>> = (props) => {
+export const VacanciesSalary: React.FC<Pick<IData, 'salary'>> = (props) => {
     const { salary } = props;
 
     let MIN_SALARY = 0;

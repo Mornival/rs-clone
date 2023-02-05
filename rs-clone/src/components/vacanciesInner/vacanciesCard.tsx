@@ -4,8 +4,12 @@ import { VacanciesSalary } from './vacanciesSalary';
 import { VacanciesAmount } from './vacanciesAmount';
 import { useEffect, useState } from 'react';
 
-export const VacanciesCart = (props: { setPagesVacancies: number; btn: undefined | HTMLButtonElement }) => {
-    const { setPagesVacancies, btn } = props;
+export const VacanciesCart: React.FC<{
+    setPagesVacancies: number;
+    btn: undefined | HTMLButtonElement;
+    getVacanciesName: (name: string) => void;
+}> = (props) => {
+    const { setPagesVacancies, btn, getVacanciesName } = props;
 
     const [state, setState] = useState<Pick<IData, 'id' | 'name' | 'salary'>[]>([]);
 
@@ -35,12 +39,19 @@ export const VacanciesCart = (props: { setPagesVacancies: number; btn: undefined
         return resultColor;
     }
 
+    const getNameVacanciesHandler = (name: string) => getVacanciesName(name);
+
     return (
         <>
             {state.map(({ name, id, salary }) => (
-                <li className="vacancies__item" key={id} style={{ borderLeftColor: getRandomColor() }}>
+                <li
+                    className="vacancies__inner"
+                    key={id}
+                    style={{ borderLeftColor: getRandomColor() }}
+                    onClick={() => getNameVacanciesHandler(name)}
+                >
                     <h2 className="vacancies__title">{name}</h2>
-                    <VacanciesSalary salary={salary} name={name} />
+                    <VacanciesSalary salary={salary} />
                     <VacanciesAmount name={name} />
                 </li>
             ))}

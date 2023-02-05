@@ -2,6 +2,7 @@ export interface IData {
     name: string,
     id: string,
     salary: ISalary
+    area: IArea
 }
 
 interface ISalary {
@@ -9,4 +10,10 @@ interface ISalary {
     from: number | null;
     gross: boolean,
     to: number | null
+}
+
+interface IArea {
+    id: string;
+    name: string;
+    url: string;
 }
