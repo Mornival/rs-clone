@@ -3,6 +3,7 @@ import { Header } from './components/Header/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { VacanciesPages } from './pages/vacancy';
 import { Footer } from './components/Footer/Footer';
+import { NotFound } from './pages/notFound';
 
 export function App() {
     return (
@@ -20,6 +21,7 @@ export function App() {
                         }
                     />
                     <Route path="/vacancies" element={<VacanciesPages />} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         </>

@@ -1,0 +1,41 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3rem 9rem 5rem 9rem;
+}
+.not-found__logo {
+    width: 6rem;
+}
+.notfound-desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.man {
+    width: 40px;
+}
+.text {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    line-height: 1.5;
+}
+.text-tittle {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+.text-desc {
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+.text-info {
+    font-weight: 500;
+}
+.blue {
+    color: #3c9df2;;
+}
+.blue:hover {
+    color: orange;
+}
