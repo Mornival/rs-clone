@@ -106,11 +106,17 @@ export interface IItem{
     salary:ISalary|null,
     adv_response_url: string,
     archived: boolean,
+    name: string,
     area: IArea,
     initial_created_at: string,
     created_at: string,
     published_at:string,
     employer:{
+        name:string,
+        trusted:boolean,
+        logo_urls:{
+            original: string;
+        }
         blacklisted:boolean
     }|null,
     response_letter_required:boolean,
@@ -137,7 +143,11 @@ export interface IItem{
     working_days: IWorkingDays|null,
     accept_temporary: boolean|null,
     professional_roles:IProfessionalRoles[],
-    languages: ILanguages
+    languages: ILanguages,
+    snippet:{
+        requirement: string,
+        responsibility: string
+    }
 }
 export interface IResponse {
     alternate_url: string,

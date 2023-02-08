@@ -1,10 +1,10 @@
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import './vacancy.scss'
 import { response_name } from '../types/enum';
+import { IResponse } from '../types/interfaces';
 import { VacancySmallDescription } from '../components/vacancySmallDescription/VacancySmallDescription';
-import { StringMappingType } from 'typescript';
 //search?area=1&part_time=temporary_job_true&search_field=name&search_field=company_name&search_field=description&enable_snippets=true&text=&ored_clusters=true
 const BASIC_URL = 'https://server-jobs.onrender.com/api';
 const REQUEST = async () => {
@@ -23,34 +23,33 @@ const REQUEST = async () => {
         console.log('error', error);
     }
 }
-
+let valid = true;
 export const VacanciesPages = () => {
-    let valid = true;
-    let obj: any[] = [];
+    const [obj, setObj] = useState<IResponse>();
+    const [render, setRender] = useState<boolean>(false);
     const getVacancies = async () => {
         valid = false;
-        obj = await REQUEST();
-        console.log(obj);
+        setObj(await REQUEST());
     };
-    // const createListVacancies = () => {
-    //     if(obj){
-    //         return obj.items.forEach((v) => {
-    //             console.log(obj);
-    //             return <VacancySmallDescription props={v}/>
-    //         })
-    //     }
-    // }
+    const createVacancies = () => {
+        if(obj){
+            return obj.items.map((v) => {
+                return <VacancySmallDescription props={v} key={v.id}/>
+            })
+        }
+    }
     useEffect(() => {
-        if (!obj.length && valid) getVacancies();
-        // if(obj) createListVacancies();
+        if (valid) getVacancies();
+        if (obj && !render){
+            setRender(true);
+        } 
     }, [obj]);
     return (
         <>
             <Header />
             <main className="main">
-                <h1>Страница Вакансий</h1>
                 <div className='vacancies-list-block'>
-                    {/* {createListVacancies()} */}
+                    {render && createVacancies()}
                 </div>
             </main>
             <Footer />

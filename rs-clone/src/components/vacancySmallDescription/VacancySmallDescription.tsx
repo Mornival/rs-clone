@@ -1,20 +1,31 @@
-import { useEffect } from "react";
-
-export const VacancySmallDescription = () => {
-    let valid = true;
-    const getVacancies = async () => {
-        valid = false;
-    };
-    useEffect(() => {
-        if (valid) getVacancies();
-    }, []);
+import { IItem } from "../../types/interfaces";
+import { Link } from "react-router-dom";
+import './VacancySmallDescription.scss'
+interface IProps{
+    props: IItem
+}
+export const VacancySmallDescription = (data: IProps) => {
+    let vacancy: IItem = data.props;
+    console.log(vacancy);
+    let currency: string = 'y.e';
+    if(vacancy.salary){
+        if(vacancy.salary.currency === 'RUR'){
+            currency = 'руб.'
+        } else if(vacancy.salary.currency === 'BYR'){
+            currency = 'бел. руб.'
+        }
+    }
     return (
         <>
-            {/* <div className="vacancy-small-description">
-                <h2>{props.name}</h2>
-                <h3>{props.salary.from} - {props.salary.to} {props.salary.currency}</h3>
-                <img src={props.logo_urls.original} alt="logo"/>
-            </div> */}
+            <div className="vacancy-small-description">
+                <Link to={`vacancies/${vacancy.id}`}> <h2>{vacancy.name}</h2></Link>
+                {vacancy.salary && <h3>{vacancy.salary.from}{vacancy.salary.from && vacancy.salary.to && ' - '}{vacancy.salary.to} {currency}</h3>}
+                {vacancy.employer?.logo_urls && <img  className ='vacancies-small-img'src={vacancy.employer?.logo_urls.original} alt="logo"/>}
+                {vacancy.employer?.name && <p>{vacancy.employer?.name}</p>}
+                {vacancy.snippet.responsibility && <p>{vacancy.snippet.responsibility}</p>}
+                {vacancy.snippet.requirement && <p>{vacancy.snippet.requirement}</p>}
+                <button>Откликнуться</button>
+            </div>
         </>
     )
 };
