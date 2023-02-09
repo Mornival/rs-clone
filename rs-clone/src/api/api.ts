@@ -22,4 +22,19 @@ export const REQUEST = async (value = '') => {
     }
 }
 
+const setParamId = (params: string) => `/${params}`;
 
+export const getRequestVacancies = async (value = '') => {
+    try {
+        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}${value ? setParamId(value) : ''}`, {
+            headers: {
+                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
+            }
+        }
+        )
+        if (!RESPONSE.ok) throw new Error('Страница не загружена');
+        return await RESPONSE.json();
+    } catch (error) {
+        console.log('error', error);
+    }
+}
