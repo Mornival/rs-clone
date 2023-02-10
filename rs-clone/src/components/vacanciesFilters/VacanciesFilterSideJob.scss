@@ -1,0 +1,19 @@
+.vacancy-filter-element{
+    margin:10px;
+    overflow: auto;
+    max-height:300px;
+}
+.vacancy-filter-line{
+    display: flex;
+    flex-direction:row;
+    input{
+        margin-right:10px;
+    }
+    p{
+        margin:5px;
+    }
+    .vacancy-filter-text-hidden{
+        color:#959799;
+        font-style:italic;
+    }
+}
