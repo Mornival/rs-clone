@@ -74,6 +74,17 @@ interface IProfessionalRoles{
     name: string
 }
 
+export interface IClasters{
+    id: string,
+    name: string,
+    items: {
+        name: string,
+        url: string,
+        count: number,
+        type: string|null
+    }[]
+}
+
 export interface IItem{
     id: string,
     description: string,
@@ -147,12 +158,12 @@ export interface IItem{
     snippet:{
         requirement: string,
         responsibility: string
-    }
+    },
 }
 export interface IResponse {
     alternate_url: string,
     arguments: null,
-    clusters: null,
+    clusters: IClasters[]|null,
     found: number,
     items: IItem[],
     page:number,

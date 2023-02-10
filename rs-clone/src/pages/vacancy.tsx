@@ -5,13 +5,15 @@ import './vacancy.scss'
 import { response_name } from '../types/enum';
 import { IResponse } from '../types/interfaces';
 import { VacancySmallDescription } from '../components/vacancySmallDescription/VacancySmallDescription';
-//search?area=1&part_time=temporary_job_true&search_field=name&search_field=company_name&search_field=description&enable_snippets=true&text=&ored_clusters=true
+import { VacanciesFilterSideJob } from '../components/vacanciesFilters/VacanciesFilterSideJob';
+//search?part_time=temporary_job_true&search_field=name&search_field=company_name&search_field=description&enable_snippets=true
+//https://hh.ru/shards/vacancy/search?part_time=temporary_job_true&search_field=name&search_field=company_name&search_field=description&enable_snippets=true
 const BASIC_URL = 'https://server-jobs.onrender.com/api';
 const REQUEST = async () => {
     try {
         // const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}`
-        console.log(`${BASIC_URL}/${response_name.vacancies}/15`);
-        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/?search?area=1`, {
+        // console.log(`${BASIC_URL}/${response_name.vacancies}/?search?part_time=temporary_job_true`);
+        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/?search&clusters=true`, {
             headers: {
                 'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
             }
@@ -31,23 +33,33 @@ export const VacanciesPages = () => {
         valid = false;
         setObj(await REQUEST());
     };
+    const createFilters = () => {
+        if (obj && obj.clusters) {
+            return obj.clusters.map((v) => {
+                return <VacanciesFilterSideJob props={v} key={v.id} />
+            })
+        }
+    }
     const createVacancies = () => {
-        if(obj){
+        if (obj) {
             return obj.items.map((v) => {
-                return <VacancySmallDescription props={v} key={v.id}/>
+                return <VacancySmallDescription props={v} key={v.id} />
             })
         }
     }
     useEffect(() => {
         if (valid) getVacancies();
-        if (obj && !render){
+        if (obj && !render) {
             setRender(true);
-        } 
+        }
     }, [obj]);
     return (
         <>
             <Header />
-            <main className="main">
+            <main className="vacancies-filter-page">
+                <div className="vacancies-filter-block">
+                    {render && createFilters()}
+                </div>
                 <div className='vacancies-list-block'>
                     {render && createVacancies()}
                 </div>

@@ -6,7 +6,6 @@ interface IProps{
 }
 export const VacancySmallDescription = (data: IProps) => {
     let vacancy: IItem = data.props;
-    console.log(vacancy);
     let currency: string = 'y.e';
     if(vacancy.salary){
         if(vacancy.salary.currency === 'RUR'){
@@ -22,6 +21,7 @@ export const VacancySmallDescription = (data: IProps) => {
                 {vacancy.salary && <h3>{vacancy.salary.from}{vacancy.salary.from && vacancy.salary.to && ' - '}{vacancy.salary.to} {currency}</h3>}
                 {vacancy.employer?.logo_urls && <img  className ='vacancies-small-img'src={vacancy.employer?.logo_urls.original} alt="logo"/>}
                 {vacancy.employer?.name && <p>{vacancy.employer?.name}</p>}
+                {vacancy.area && <p className='vacancy-small-area'>{vacancy.area.name}</p>}
                 {vacancy.snippet.responsibility && <p>{vacancy.snippet.responsibility}</p>}
                 {vacancy.snippet.requirement && <p>{vacancy.snippet.requirement}</p>}
                 <button>Откликнуться</button>
