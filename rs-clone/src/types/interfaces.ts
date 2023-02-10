@@ -74,15 +74,17 @@ interface IProfessionalRoles{
     name: string
 }
 
+export interface IItems {
+    name: string,
+    url: string,
+    count: number,
+    type: string|null
+}
+
 export interface IClasters{
     id: string,
     name: string,
-    items: {
-        name: string,
-        url: string,
-        count: number,
-        type: string|null
-    }[]
+    items: IItems[]
 }
 
 export interface IItem{

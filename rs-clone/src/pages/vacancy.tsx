@@ -50,7 +50,6 @@ export const VacanciesPages = () => {
     useEffect(() => {
         if (valid) getVacancies();
         if (obj && !render) {
-            console.log(render);
             setRender(true);
         }
     }, [obj]);

@@ -1,24 +1,25 @@
 import cluster from "cluster";
 import './VacanciesFilterSideJob.scss';
+import { VacanciesFilterCheckbox } from "./VacanciesFilterCheckbox";
+import { VacanciesFilterRadio } from "./VacanciesFilterRadio"; 
 import { IClasters } from "../../types/interfaces";
 interface IProps{
     props: IClasters
 }
-
 export const VacanciesFilterSideJob = (props: IProps) => {
     let clusters: IClasters = props.props;
     console.log(clusters);
     return (
         <>
+        <h2>{clusters.name}</h2>
         <div className="vacancy-filter-element">
-            <h1>{clusters.name}</h1>
-            <form>
+            <form id={clusters.name}>
                 {clusters.items.map((v) => {
-                    return <div className="vacancy-filter-line" key={v.name}>
-                        <input type="checkbox"/>
-                        <p>{v.name}</p>
-                        <p className="vacancy-filter-text-hidden">{v.count}</p>
-                    </div>
+                    if(clusters.name === 'Уровень дохода'){
+                        // console.log(v);
+                        return <VacanciesFilterRadio props={v} name={clusters.name} key={v.name}/>
+                    }
+                    return <VacanciesFilterCheckbox props={v} name={clusters.name}  key={v.name}/>
                 })}
             </form>
         </div>
