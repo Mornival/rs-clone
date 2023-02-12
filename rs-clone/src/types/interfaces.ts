@@ -15,6 +15,10 @@ export interface IData {
     employer: IEmployer | undefined;
     address: IAddress | undefined
     description: string | undefined
+    branded_description: string | undefined
+    key_skills: [{
+        [key: string]: string
+    }]
 }
 
 interface ISalary {

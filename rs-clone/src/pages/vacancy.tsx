@@ -15,7 +15,7 @@ export const VacanciesPages = () => {
 
     const STYLE_LINK = {
         display: 'block',
-        marginBottom : '2rem'
+        marginBottom: '2rem',
     };
 
     return (

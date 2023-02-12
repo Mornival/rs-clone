@@ -11,6 +11,16 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
     const arrPhone = [];
     contactsEmployer && arrPhone.push(...contactsEmployer.phones);
 
+    const getValidEmail = (param: string) => {
+        if (param) {
+            return (
+                <a className="top-info__email" href={param} target="_blank" rel="noreferrer">
+                    {param}
+                </a>
+            );
+        }
+    };
+
     return (
         <ul className="descriptions__top-buttons">
             <li className="descriptions__top-item">
@@ -40,14 +50,7 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
                                   ))
                                 : 'Загрузка...'}
                         </ul>
-                        <a
-                            className="top-info__email"
-                            href={contactsEmployer ? `mailto:${contactsEmployer.email}` : ''}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            {contactsEmployer ? contactsEmployer.email : 'Загрузка...'}
-                        </a>
+                        {contactsEmployer ? getValidEmail(contactsEmployer.email) : 'Загрузка...'}
                     </address>
                 </div>
 

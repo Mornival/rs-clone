@@ -27,8 +27,7 @@
     }
 
     &__top,
-    &__brends,
-    &__content {
+    &__brends {
         box-shadow: 0 2px 12px 0 rgb(48 50 51 / 10%);
         border-radius: 4px;
         padding: 2.8rem;
@@ -137,6 +136,39 @@
             background: url("./img/icon/icon-favorit.jpg") no-repeat center/cover;
         }
     }
+
+    &__content {
+        margin-bottom: 4rem;
+
+        p {
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+
+        ul {
+            &:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+        }
+
+        li {
+            &::before {
+                content: "— ";
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    &__skills {
+        margin-bottom: 2rem;
+    }
+
+    &__contact {
+    }
 }
 
 .top-info {
@@ -173,6 +205,70 @@
     &__email {
         &::before {
             content: "📧";
+        }
+    }
+}
+
+.des-contanct {
+    position: relative;
+
+    &.active {
+        .des-contanct {
+            &__box {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__title {
+        margin-bottom: 1rem;
+        font-size: 3.2rem;
+        font-weight: 700;
+    }
+
+    &__box {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--white);
+        opacity: 0;
+        padding: 2rem 3rem;
+    }
+
+    &__name {
+        margin-bottom: 1rem;
+    }
+
+    &__phone {
+        margin-bottom: 1rem;
+    }
+
+    &__phone-link,
+    &__email {
+        color: var(--blue-100);
+    }
+
+    &__phone-link {
+        &::before {
+            content: "📞 ";
+        }
+    }
+
+    &__email {
+        &::before {
+            content: "📧 ";
+        }
+    }
+
+    &__btn {
+        border: 1px solid var(--blue-200);
+        border-radius: 5px;
+        padding: 1.1rem;
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+        &:hover {
+            background-color: var(--blue-300);
+            color: var(--white);
         }
     }
 }
