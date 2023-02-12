@@ -25,13 +25,11 @@ const GetData = () => {
     );
 };
 
-const Test = () => <h2>Hellow</h2>;
-
 export const DescriptionPages = () => {
     const res = useLoaderData() as IData;
 
     return (
-        <Suspense fallback={<Test />}>
+        <Suspense fallback={<h2>Загрузка...</h2>}>
             <Await resolve={res}>
                 <GetData />
             </Await>
