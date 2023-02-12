@@ -13,8 +13,7 @@ export const DesTimeline = (props: {
             const [schedule, employment] = value;
             return schedule.name + ' , ' + employment.name;
         }
-        return `Загрузка...`;
     };
 
-    return <span className='descriptions__employment'>{setEmployment(employment, schedule)}</span>;
+    return <span className="descriptions__employment">{setEmployment(employment, schedule)}</span>;
 };

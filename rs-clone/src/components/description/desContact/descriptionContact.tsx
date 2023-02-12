@@ -1,25 +1,6 @@
 import { IData } from '../../../types/interfaces';
-import { getRequestVacancies } from '../../../api/api';
-import { useState, useEffect } from 'react';
 
-import { useParams } from 'react-router-dom';
-
-export const DescriptionContact = () => {
-    const [state, setState] = useState<Pick<IData, 'contacts'>>();
-    const { id } = useParams();
-
-    let valid = true;
-
-    const getVacancies = async () => {
-        valid = false;
-        const response = await getRequestVacancies(id);
-        setState(response);
-    };
-
-    useEffect(() => {
-        if (valid) getVacancies();
-    }, []);
-
+export const DescriptionContact = (props: { data: IData }) => {
     function addClassInfoNandler() {
         const box = arguments[0].target.parentElement as HTMLElement;
         box.classList.toggle('active');
@@ -35,7 +16,7 @@ export const DescriptionContact = () => {
         }
     };
 
-    const contactsEmployer = state?.contacts || '';
+    const contactsEmployer = props.data?.contacts || '';
     const arrPhone = [];
     contactsEmployer && arrPhone.push(...contactsEmployer.phones);
 
@@ -44,7 +25,7 @@ export const DescriptionContact = () => {
             <h2 className="des-contanct__title">Контактная информация</h2>
 
             <div className="des-contanct__box">
-                <h3 className="des-contanct__name">{contactsEmployer ? contactsEmployer.name : 'Загрузка...'}</h3>
+                <h3 className="des-contanct__name">{contactsEmployer ? contactsEmployer.name : ''}</h3>
 
                 <address className="des-contanct__address">
                     <ul className="des-contanct__phone-box">
@@ -61,9 +42,9 @@ export const DescriptionContact = () => {
                                       </a>
                                   </li>
                               ))
-                            : 'Загрузка...'}
+                            : ''}
                     </ul>
-                    {contactsEmployer ? getValidEmail(contactsEmployer.email) : 'Загрузка...'}
+                    {contactsEmployer ? getValidEmail(contactsEmployer.email) : ''}
                 </address>
             </div>
 

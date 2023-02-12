@@ -9,7 +9,7 @@ export const BrendName: React.FC<Pick<IData, 'employer'>> = (props) => {
 
     return (
         <div className="des-brend__title-box">
-            <h2 className="des-brend__title">{employer ? employer.name : 'Загрузка'}</h2>
+            <h2 className="des-brend__title">{employer ? employer.name : ''}</h2>
             <span
                 className="des-brend__valid"
                 style={{

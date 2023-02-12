@@ -1,30 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getRequestVacancies } from '../../../api/api';
 import { IData } from '../../../types/interfaces';
 
-export const DescriptionContent = () => {
-    let validLoader = true;
-    const [state, setState] = useState<Pick<IData, 'branded_description' | 'description'>>();
-    const params = useParams();
-    const { id } = params;
-
-    const getRequire = async () => {
-        validLoader = false;
-        const response = await getRequestVacancies(id);
-        setState(response);
-    };
-
-    useEffect(() => {
-        if (validLoader) getRequire();
-    }, []);
-    
+export const DescriptionContent = (props: { data: IData }) => {
     let validContent = '';
 
-    if (state?.branded_description) {
-        validContent = state?.branded_description;
-    } else if (state?.branded_description === null) {
-        validContent = state?.description || '';
+    if (props.data?.branded_description) {
+        validContent = props.data?.branded_description;
+    } else if (props.data?.branded_description === null) {
+        validContent = props.data?.description || '';
     } else {
         validContent = 'Загрузка...';
     }

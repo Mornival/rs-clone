@@ -14,7 +14,7 @@ export const BrendAddress: React.FC<Pick<IData, 'address'>> = (props) => {
     } else if (address === null) {
         validAddress = 'Адрес не указан';
     } else {
-        validAddress = 'Загрузка...';
+        validAddress = '';
     }
     return <span className="des-brend__address">{validAddress}</span>;
 };
