@@ -3,25 +3,34 @@ import { Header } from './components/Header/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { VacanciesPages } from './pages/vacancy';
 import { Footer } from './components/Footer/Footer';
+import urlContext, { defaultUrl } from './context/historyURL';
+import { useState } from 'react';
 
 export function App() {
+    const [url, toggleUrl] = useState(defaultUrl.url);
+    const setUrl = () => { toggleUrl(!url) };
     return (
         <>
-            <Router>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                <Header />
-                                <Vacancies />
-                                <Footer />
-                            </>
-                        }
-                    />
-                    <Route path="/vacancies" element={<VacanciesPages />} />
-                </Routes>
-            </Router>
+            <urlContext.Provider value={{
+                url,
+                setUrl
+            }}>
+                <Router>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <>
+                                    <Header />
+                                    <Vacancies />
+                                    <Footer />
+                                </>
+                            }
+                        />
+                        <Route path="/vacancies" element={<VacanciesPages />} />
+                    </Routes>
+                </Router>
+            </urlContext.Provider>
         </>
     );
 }

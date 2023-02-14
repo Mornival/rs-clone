@@ -20,3 +20,18 @@ h2{
         font-style:italic;
     }
 }
+.vacancy-filter-own-salary{
+    display: flex;
+    flex-direction: column;
+    input {
+        margin-right:10px;
+        text-align: center;
+        font-size:1.8rem;
+    }
+}
+.vacancies-own-salary{
+    height:40px;
+    border:1px solid black;
+    border-radius:5px;
+    margin-top:10px;
+}

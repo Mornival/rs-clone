@@ -1,6 +1,6 @@
 import { IItems } from "../../types/interfaces"
 
-
-export const addPartOfQuery = (cluster: IItems) => {
-    console.log(cluster.url.substring(cluster.url.lastIndexOf('&'),cluster.url.length));
+export const AddPartOfQuery = (cluster: IItems) => {
+    let urlPart: string = cluster.url.substring(cluster.url.lastIndexOf('&') + 1,cluster.url.length);
+    return urlPart;
 }
