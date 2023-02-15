@@ -15,8 +15,16 @@ export const VacanciesFilterRadio = (props: IProps) => {
     let item = props.props;
     let name = props.name;
     let idItem: string = props.id;
+    let checkStatus: boolean = false;
     const param: string = AddPartOfQuery(item);
     const queryParam = qs.parse(param);
+    const queryString: string = window.location.search.substring(1);
+    const queryObj: qs.ParsedQs = qs.parse(queryString);
+    if(queryObj){
+        if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
+            checkStatus = true;
+        }
+    }
     const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
@@ -28,7 +36,7 @@ export const VacanciesFilterRadio = (props: IProps) => {
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="radio" name={name} onClick={e => clickRadio(e)}/>
+            <input type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus}/>
             <p>{item.name}</p>
             <p className="vacancy-filter-text-hidden">{item.count}</p>
         </div>

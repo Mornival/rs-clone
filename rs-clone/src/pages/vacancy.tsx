@@ -9,6 +9,8 @@ import { VacanciesFilterSideJob } from '../components/vacanciesFilters/Vacancies
 import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import urlContext from '../context/historyURL';
+import { VacanciesPagination } from '../components/vacanciesFilters/VacanciesPagination';
+import qs from 'qs';
 const BASIC_URL = 'https://server-jobs.onrender.com/api';
 const REQUEST = async () => {
     try {
@@ -43,6 +45,7 @@ const BASE_REQUEST = async () => {
     }
 }
 let valid = true;
+let startValid = true;
 export const VacanciesPages = () => {
     const {url, setUrl} = useContext(urlContext);
     const [obj, setObj] = useState<IResponse>();
@@ -52,6 +55,10 @@ export const VacanciesPages = () => {
     const getVacancies = async () => {
         valid = false;
         setObj(await REQUEST());
+    };
+    const getFilters = async () => {
+        valid = false;
+        setFilterObj(await BASE_REQUEST());
     };
     const createFilters = () => {
         if (filterObj && filterObj.clusters) {
@@ -67,15 +74,55 @@ export const VacanciesPages = () => {
             })
         }
     }
+    const getPagination = () =>{
+        if(obj){
+            let pageArr = [1];
+            const queryString: string = window.location.search.substring(1);
+            const queryObj: qs.ParsedQs = qs.parse(queryString);
+            for(let i: number = 2; i < 8 ; i++){
+                if(queryObj.page){
+                    if(+queryObj.page >= 2 && +queryObj.page  + 2 <= obj.pages){
+                        if(i < 7){
+                            pageArr.push(+queryObj.page + i - 3);
+                        } else {
+                            pageArr.push(obj.pages);
+                        }
+                    }  else if(+queryObj.page + 2 > obj.pages){
+                        if(i < 7){
+                            pageArr.push(obj.pages - 7 + i);
+                        } else {
+                            pageArr.push(obj.pages);
+                        }
+                    } else {
+                        if(i < 7){
+                            pageArr.push(+queryObj.page + i);
+                        } else {
+                            pageArr.push(obj.pages);
+                        }
+                    }
+                } else {
+                    if(i < 7){
+                        pageArr.push(i);
+                    } else {
+                        pageArr.push(obj.pages);
+                    }
+                }
+            }
+            return pageArr.map((v, i) => {
+                return <VacanciesPagination page={v} key={i}/>
+            })
+        }
+    }
     useEffect(() => {
         if (valid){
             getVacancies();
         }
-        if(obj){
-            setRender(true);
+        if(startValid){
+            getFilters();
         }
-        if (obj && !renderFilter && !filterObj) {
-            setFilterObj(obj);
+        if(obj){
+            console.log(obj);
+            setRender(true);
         }
     }, [obj]);
     useEffect(() => {
@@ -100,9 +147,10 @@ export const VacanciesPages = () => {
                 </div>
                 <div className='vacancies-list-block'>
                     {render && createVacancies()}
+                    {render && <div className='vacancies-filter-pagination'>{getPagination()}</div>}
                 </div>
             </main>}
-            {!render && <div className="vacancies-loading-block">
+            {!render || !renderFilter && <div className="vacancies-loading-block">
                 <h2 className="vacancies-loading-h2">Loading...</h2>
             </div>}
             <Footer />

@@ -14,21 +14,14 @@ export const VacanciesFilterSideJob = (props: IProps) => {
         <h2>{clusters.name}</h2>
         <div className="vacancy-filter-element">
             <form id={clusters.name}>
-                {clusters.items.map((v, i) => {
+                {clusters.items.map((v, i , a) => {
                     if(clusters.name === 'Уровень дохода'){
                         if(i === 0 && ownSalary){
                             ownSalary = false;
                             i--;
                             return <VacanciesChooseSalary name={clusters.name} key={'Своя-зарплата'}/>
                         }
-                        if(clusters.items.length === i + 1){
-                            return <VacanciesFilterRadio props={v} name={clusters.name} id={clusters.id} key={v.name}/>
-                        }
-                        if(v.name !== 'Указан'){
-                            return <VacanciesFilterRadio props={v} name={clusters.name} id={clusters.id} key={v.name}/>
-                        } else {
-                            return <VacanciesFilterCheckbox props={v} name={clusters.name}  id={clusters.id} key={v.name}/>
-                        }
+                        return <VacanciesFilterRadio props={v} name={clusters.name} id={clusters.id} key={v.name}/>
                     }
                     return <VacanciesFilterCheckbox props={v} name={clusters.name} id={clusters.id} key={v.name}/>
                 })}

@@ -17,8 +17,16 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     let name: string = props.name;
     let idItem: string = props.id;
     const {setUrl} = useContext(urlContext);
+    let checkStatus: boolean = false;
     const param: string = AddPartOfQuery(item);
     const queryParam = qs.parse(param);
+    const queryString: string = window.location.search.substring(1);
+    const queryObj: qs.ParsedQs = qs.parse(queryString);
+    if(queryObj){
+        if(queryObj[`${idItem}`] && queryObj[`${idItem}`] === queryParam[`${idItem}`]){
+            checkStatus = true;
+        }
+    }
     const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
         let queryString: string = window.location.search.substring(1);
         let queryObj: qs.ParsedQs = qs.parse(queryString);
@@ -45,7 +53,7 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="checkbox" onClick={e => clickRadio(e)}/>
+            <input type="checkbox" onClick={e => clickRadio(e)}  defaultChecked={checkStatus}/>
             <p>{item.name}</p>
             <p className="vacancy-filter-text-hidden">{item.count}</p>
         </div>
