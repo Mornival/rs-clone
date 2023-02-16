@@ -51,7 +51,9 @@ export const BASE_REQUEST_FILTERS = async () => {
     } catch (error) {
         console.log('error', error);
     }
-}const setParamId = (params: string) => `/${params}`;
+}
+
+const setParamId = (params: string) => `/${params}`;
 
 export const getRequestVacancies = async (value = '') => {
     try {
