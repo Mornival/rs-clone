@@ -6,44 +6,12 @@ import { response_name } from '../types/enum';
 import { IResponse } from '../types/interfaces';
 import { VacancySmallDescription } from '../components/vacancySmallDescription/VacancySmallDescription';
 import { VacanciesFilterSideJob } from '../components/vacanciesFilters/VacanciesFilterSideJob';
-import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import urlContext from '../context/historyURL';
 import { VacanciesPagination } from '../components/vacanciesFilters/VacanciesPagination';
+import { VacanciesResetFilters } from '../components/vacanciesFilters/VacanciesResetFilters';
 import qs from 'qs';
-const BASIC_URL = 'https://server-jobs.onrender.com/api';
-const REQUEST = async () => {
-    try {
-        // area=1002&area=16&area=2237&search_field=name&search_field=company_name&search_field=description&enable_snippets=true
-        if(window.location.search.length === 0){
-            window.history.replaceState(null,'vacancies',`${response_name.vacancies}?search&clusters=true`);
-        }
-        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/${window.location.search}`, {
-            headers: {
-                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
-            }
-        }
-        )
-        if (!RESPONSE.ok) throw new Error('Страница не загружена');
-        return await RESPONSE.json();
-    } catch (error) {
-        console.log('error', error);
-    }
-}
-const BASE_REQUEST = async () => {
-    try {
-        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}?search=&clusters=true`, {
-            headers: {
-                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
-            }
-        }
-        )
-        if (!RESPONSE.ok) throw new Error('Страница не загружена');
-        return await RESPONSE.json();
-    } catch (error) {
-        console.log('error', error);
-    }
-}
+import { BASE_REQUEST_FILTERS , REQUEST_VACANCIES} from '../api/api';
 let valid = true;
 let startValid = true;
 export const VacanciesPages = () => {
@@ -53,12 +21,10 @@ export const VacanciesPages = () => {
     const [renderFilter, setRenderFilter] = useState<boolean>(false);
     const [render, setRender] = useState<boolean>(false);
     const getVacancies = async () => {
-        valid = false;
-        setObj(await REQUEST());
+        setObj(await REQUEST_VACANCIES());
     };
     const getFilters = async () => {
-        valid = false;
-        setFilterObj(await BASE_REQUEST());
+        setFilterObj(await BASE_REQUEST_FILTERS());
     };
     const createFilters = () => {
         if (filterObj && filterObj.clusters) {
@@ -80,7 +46,7 @@ export const VacanciesPages = () => {
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
             for(let i: number = 2; i < 8 ; i++){
-                if(queryObj.page){
+                if(queryObj.page && obj.page >= 7){
                     if(+queryObj.page >= 2 && +queryObj.page  + 2 <= obj.pages){
                         if(i < 7){
                             pageArr.push(+queryObj.page + i - 3);
@@ -100,28 +66,39 @@ export const VacanciesPages = () => {
                             pageArr.push(obj.pages);
                         }
                     }
-                } else {
+                } else if(obj.page >= 7){
                     if(i < 7){
                         pageArr.push(i);
                     } else {
                         pageArr.push(obj.pages);
                     }
+                } else if(pageArr.length <= obj.pages - 1){
+                    console.log('Its path');
+                    if(i < 7){
+                        pageArr.push(i);
+                    } else {
+                        pageArr.push(obj.pages);
+                    }           
                 }
             }
-            return pageArr.map((v, i) => {
-                return <VacanciesPagination page={v} key={i}/>
-            })
+            console.log(pageArr);
+            if(pageArr.length > 1){
+                return pageArr.map((v, i) => {
+                    return <VacanciesPagination page={v} key={i}/>
+                })
+            }
         }
     }
     useEffect(() => {
         if (valid){
+            valid = false;
             getVacancies();
         }
         if(startValid){
+            startValid = false;
             getFilters();
         }
         if(obj){
-            console.log(obj);
             setRender(true);
         }
     }, [obj]);
@@ -131,6 +108,7 @@ export const VacanciesPages = () => {
         }
     }, [filterObj]);
     useEffect(() => {
+        console.log(url);
         if(url && setUrl){
             setUrl();
             setRender(false);
@@ -144,13 +122,19 @@ export const VacanciesPages = () => {
             {renderFilter && <main className="vacancies-filter-page">
                 <div className="vacancies-filter-block">
                     {renderFilter && createFilters()}
+                    {renderFilter && <VacanciesResetFilters key="vacancies-reset-filters"/>}
                 </div>
-                <div className='vacancies-list-block'>
-                    {render && createVacancies()}
-                    {render && <div className='vacancies-filter-pagination'>{getPagination()}</div>}
-                </div>
+                {render && <div className='vacancies-list-block'>
+                    {<h2>{`Найдено: ${obj?.found} вакансий`}</h2>}
+                    {createVacancies() }
+                    {<div className='vacancies-filter-pagination'>{getPagination()}</div>}
+                </div>}
+                {renderFilter && !render && 
+                    <div className="vacancies-loading-data">
+                        <h2>Данные Загружаются</h2>
+                    </div>}
             </main>}
-            {!render || !renderFilter && <div className="vacancies-loading-block">
+            {!render && !renderFilter && <div className="vacancies-loading-block">
                 <h2 className="vacancies-loading-h2">Loading...</h2>
             </div>}
             <Footer />

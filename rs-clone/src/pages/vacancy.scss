@@ -26,3 +26,15 @@
     align-items: center;
     justify-content: center;
 }
+.vacancies-loading-data{
+    display: flex;
+    background:#edeff0;
+    justify-content: center;
+    width:75%;
+    h2{
+        top:50px;
+        font-size:3rem;
+        color:grey;
+        text-align:center;
+    }
+}
