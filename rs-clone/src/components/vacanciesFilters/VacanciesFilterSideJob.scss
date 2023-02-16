@@ -1,0 +1,39 @@
+h2{
+    margin:10px;
+}
+.vacancy-filter-element{
+    margin:10px;
+    overflow: auto;
+    max-height:300px;
+}
+.vacancy-filter-line{
+    display: flex;
+    flex-direction:row;
+    input{
+        margin-right:10px;
+    }
+    p{
+        margin:5px;
+        width:170px;
+    }
+    .vacancy-filter-text-hidden{
+        width:auto;
+        color:#959799;
+        font-style:italic;
+    }
+}
+.vacancy-filter-own-salary{
+    display: flex;
+    flex-direction: column;
+    input {
+        margin-right:10px;
+        text-align: center;
+        font-size:1.8rem;
+    }
+}
+.vacancies-own-salary{
+    height:40px;
+    border:1px solid black;
+    border-radius:5px;
+    margin-top:10px;
+}

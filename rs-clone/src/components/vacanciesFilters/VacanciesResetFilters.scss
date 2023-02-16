@@ -1,0 +1,10 @@
+.vacancy-filter-reset-button{
+    margin:10px;
+    color:#959799;
+    transition: color .1s,opacity .1s;
+    &:active{
+        color:lightgrey;
+    }
+    cursor:pointer;
+    user-select: none;
+}

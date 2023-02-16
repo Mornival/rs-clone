@@ -21,7 +21,37 @@ export const REQUEST = async (value = '') => {
     }
 }
 
-const setParamId = (params: string) => `/${params}`;
+export const REQUEST_VACANCIES = async () => {
+    try {
+        if (window.location.search.length === 0) {
+            window.history.replaceState(null, 'vacancies', `${response_name.vacancies}?search`);
+        }
+        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/${window.location.search}`, {
+            headers: {
+                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
+            }
+        }
+        )
+        if (!RESPONSE.ok) throw new Error('Страница не загружена');
+        return await RESPONSE.json();
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+export const BASE_REQUEST_FILTERS = async () => {
+    try {
+        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}?search=&clusters=true`, {
+            headers: {
+                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
+            }
+        }
+        )
+        if (!RESPONSE.ok) throw new Error('Страница не загружена');
+        return await RESPONSE.json();
+    } catch (error) {
+        console.log('error', error);
+    }
+}const setParamId = (params: string) => `/${params}`;
 
 export const getRequestVacancies = async (value = '') => {
     try {
