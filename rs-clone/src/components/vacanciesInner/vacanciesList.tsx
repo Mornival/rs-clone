@@ -31,7 +31,7 @@ export const VacanciesList: React.FC<Pick<IData, 'name'>> = (props) => {
                                 <p className="vacancies-list__area">Месторасположение: {area.name}</p>
                                 <VacanciesSalary salary={salary} />
                             </div>
-                            <Link className="vacancies-list__btn" to="/vacancy">
+                            <Link className="vacancies-list__btn" to="/vacancies">
                                 {`>`}
                             </Link>
                         </li>
