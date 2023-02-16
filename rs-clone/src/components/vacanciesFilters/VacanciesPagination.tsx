@@ -14,18 +14,18 @@ export const VacanciesPagination = (props: IProps) => {
     const {setUrl} = useContext(urlContext);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
-    if(queryObj['page'] === (page - 1).toString()){
+    if(queryObj['page'] === (page - 1).toString() || (page === 1 && !queryObj['page'])){
         activePagination = true;
     }
     const clickPagination = () => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         if(queryObj['page'] !== (page - 1).toString()){
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-              });
             queryObj['page'] = (page - 1).toString();
             console.log(queryObj);
             window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);

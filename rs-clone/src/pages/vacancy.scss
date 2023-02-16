@@ -1,12 +1,19 @@
 .vacancies-filter-page{
     display: flex;
     flex-direction: row;
+    max-width:1200px;
+    margin-left: calc(50% - 600px);
     .vacancies-list-block{
         min-height:100px;
-        width:75%;
+        width:calc(100% - 300px);
+        h2{
+            margin:30px;
+        }
     }
     .vacancies-filter-block{
-        width:25%;
+        width:300px;
+        position: sticky; 
+        bottom: 0;
     }
 }
 .vacancies-loading-block{
@@ -30,7 +37,7 @@
     display: flex;
     background:#edeff0;
     justify-content: center;
-    width:75%;
+    width:100%;
     h2{
         top:50px;
         font-size:3rem;

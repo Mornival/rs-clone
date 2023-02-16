@@ -10,7 +10,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
     const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        // console.log(queryObj);
+        console.log(queryObj);
     }
     return (
         <div className="vacancy-filter-own-salary">

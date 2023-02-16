@@ -90,7 +90,7 @@ export const VacanciesPages = () => {
         }
     }
     useEffect(() => {
-        if (valid){
+        if (valid && !obj){
             valid = false;
             getVacancies();
         }
@@ -120,10 +120,17 @@ export const VacanciesPages = () => {
         <>
             <Header />
             {renderFilter && <main className="vacancies-filter-page">
-                <div className="vacancies-filter-block">
-                    {renderFilter && createFilters()}
-                    {renderFilter && <VacanciesResetFilters key="vacancies-reset-filters"/>}
-                </div>
+                {renderFilter && <div className="vacancies-filter-block">
+                    {/* {<select name="date" id="date-select">
+                        <option value="">За всё время</option>
+                        <option value="30">За месяц</option>
+                        <option value="7">За неделю</option>
+                        <option value="3">За последние 3 дня</option>
+                        <option value="1">За день</option>
+                    </select>} */}
+                    {createFilters()}
+                    {<VacanciesResetFilters key="vacancies-reset-filters"/>}
+                </div>}
                 {render && <div className='vacancies-list-block'>
                     {<h2>{`Найдено: ${obj?.found} вакансий`}</h2>}
                     {createVacancies() }
