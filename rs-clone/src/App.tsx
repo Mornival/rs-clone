@@ -5,7 +5,7 @@ import urlContext, { defaultUrl } from './context/historyURL';
 import { useState } from 'react';
 import { DescriptionPages, loader } from './pages/description';
 import { Layout } from './components/Layout';
-import { ErrorPages } from './pages/error';
+import { NotFound } from './pages/notFound';
 
 export const App = () => {
     const [url, toggleUrl] = useState(defaultUrl.url);
@@ -15,7 +15,7 @@ export const App = () => {
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route path="/" element={<Layout />} errorElement={<ErrorPages />}>
+            <Route path="/" element={<Layout />} errorElement={<NotFound />}>
                 <Route index element={<Vacancies />} />
                 <Route path="vacancies" element={<VacanciesPages />} />
                 <Route path="vacancies/:id" element={<DescriptionPages />} loader={loader} />
