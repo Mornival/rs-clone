@@ -1,8 +1,5 @@
-import { Header } from '../components/Header/Header';
-import { Footer } from '../components/Footer/Footer';
 import { useState, useEffect } from 'react';
 import './vacancy.scss';
-import { response_name } from '../types/enum';
 import { IResponse } from '../types/interfaces';
 import { VacancySmallDescription } from '../components/vacancySmallDescription/VacancySmallDescription';
 import { VacanciesFilterSideJob } from '../components/vacanciesFilters/VacanciesFilterSideJob';
@@ -17,8 +14,6 @@ let startValid = true;
 
 export const VacanciesPages = () => {
     const { url, setUrl } = useContext(urlContext);
-
-    console.log(url)
     const [obj, setObj] = useState<IResponse>();
     const [filterObj, setFilterObj] = useState<IResponse>();
     const [renderFilter, setRenderFilter] = useState<boolean>(false);
@@ -44,12 +39,12 @@ export const VacanciesPages = () => {
         }
     };
     const getPagination = () => {
-        if (obj) {
+        if (obj && render) {
             let pageArr = [1];
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
             for (let i: number = 2; i < 8; i++) {
-                if (queryObj.page && obj.page >= 7) {
+                if (queryObj.page && obj.page >= 4) {
                     if (+queryObj.page >= 2 && +queryObj.page + 2 <= obj.pages) {
                         if (i < 7) {
                             pageArr.push(+queryObj.page + i - 3);
@@ -76,7 +71,6 @@ export const VacanciesPages = () => {
                         pageArr.push(obj.pages);
                     }
                 } else if (pageArr.length <= obj.pages - 1) {
-                    console.log('Its path');
                     if (i < 7) {
                         pageArr.push(i);
                     } else {
@@ -84,7 +78,6 @@ export const VacanciesPages = () => {
                     }
                 }
             }
-            console.log(pageArr);
             if (pageArr.length > 1) {
                 return pageArr.map((v, i) => {
                     return <VacanciesPagination page={v} key={i} />;
@@ -111,7 +104,6 @@ export const VacanciesPages = () => {
         }
     }, [filterObj]);
     useEffect(() => {
-        console.log(url);
         if (url && setUrl) {
             setUrl();
             setRender(false);
