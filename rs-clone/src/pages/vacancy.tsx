@@ -9,9 +9,8 @@ import { VacanciesPagination } from '../components/vacanciesFilters/VacanciesPag
 import { VacanciesResetFilters } from '../components/vacanciesFilters/VacanciesResetFilters';
 import qs from 'qs';
 import { BASE_REQUEST_FILTERS, REQUEST_VACANCIES } from '../api/api';
-let valid = true;
-let startValid = true;
-
+let requestFilters: boolean = false;
+let requestVacancies: boolean = false;
 export const VacanciesPages = () => {
     const { url, setUrl } = useContext(urlContext);
     const [obj, setObj] = useState<IResponse>();
@@ -86,20 +85,22 @@ export const VacanciesPages = () => {
         }
     };
     useEffect(() => {
-        if (valid && !obj) {
-            valid = false;
+        if (!obj && !requestVacancies) {
+            requestVacancies = true;
             getVacancies();
         }
-        if (startValid) {
-            startValid = false;
+        if (!filterObj && !requestFilters) {
+            requestFilters = true;
             getFilters();
         }
         if (obj) {
+            requestVacancies = false;
             setRender(true);
         }
     }, [obj]);
     useEffect(() => {
         if (filterObj) {
+            requestFilters = false;
             setRenderFilter(true);
         }
     }, [filterObj]);
@@ -107,7 +108,6 @@ export const VacanciesPages = () => {
         if (url && setUrl) {
             setUrl();
             setRender(false);
-            valid = true;
             setObj(undefined);
         }
     }, [url]);
@@ -117,20 +117,13 @@ export const VacanciesPages = () => {
                 <main className="vacancies-filter-page">
                     {renderFilter && (
                         <div className="vacancies-filter-block">
-                            {/* {<select name="date" id="date-select">
-                        <option value="">За всё время</option>
-                        <option value="30">За месяц</option>
-                        <option value="7">За неделю</option>
-                        <option value="3">За последние 3 дня</option>
-                        <option value="1">За день</option>
-                    </select>} */}
                             {createFilters()}
                             {<VacanciesResetFilters key="vacancies-reset-filters" />}
                         </div>
                     )}
                     {render && (
                         <div className="vacancies-list-block">
-                            {<h2>{`Найдено: ${obj?.found} вакансий`}</h2>}
+                            {<h2 className="vacancies-list-block-h2">{`Найдено: ${obj?.found} вакансий`}</h2>}
                             {createVacancies()}
                             {<div className="vacancies-filter-pagination">{getPagination()}</div>}
                         </div>
@@ -142,7 +135,7 @@ export const VacanciesPages = () => {
                     )}
                 </main>
             )}
-            {!render && !renderFilter && (
+            {(!render || !renderFilter) && (
                 <div className="vacancies-loading-block">
                     <h2 className="vacancies-loading-h2">Loading...</h2>
                 </div>

@@ -19,12 +19,12 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     let idItem: string = props.id;
     const {url, setUrl} = useContext(urlContext);
     let checkStatus: boolean = false;
-    const param: string = AddPartOfQuery(item);
+    let param: string = AddPartOfQuery(item);
     const queryParam = qs.parse(param);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
     if(queryObj){
-        if(queryObj[`${idItem}`] && queryObj[`${idItem}`] === queryParam[`${idItem}`]){
+        if(queryObj[`${idItem}`] && (queryObj[`${idItem}`] === queryParam[`${idItem}`] || queryString.includes((queryParam[`${idItem}`] as string)))){
             checkStatus = true;
         }
     }
@@ -40,7 +40,7 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
         let queryObj: qs.ParsedQs = qs.parse(queryString);
         if(!queryObj[`${idItem}`]){
             queryObj[`${idItem}`] = queryParam[`${idItem}`];
-        } else if(queryObj[`${idItem}`]){
+        } else if(queryObj[`${idItem}`] && !Array.isArray(queryObj[`${idItem}`])){
             if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
                 delete queryObj[`${idItem}`];
             } else {
