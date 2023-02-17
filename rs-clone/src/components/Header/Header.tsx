@@ -3,14 +3,28 @@ import logo from './img/logo.png';
 import loupeimg from './img/loupe.png';
 import filter from './img/filter.png';
 import { Link } from 'react-router-dom';
+import { useState} from 'react';
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import urlContext from "../../context/historyURL";
 
 export function Header() {
+    const {setUrl} = useContext(urlContext);
     const blockSearch = document.querySelector('.block-search');
     const tringle = document.querySelector('.tringle');
     const searchBtn = document.querySelector('.search-btn');
     const btnsearch = document.querySelector('.btn-search');
     const filtersearch = document.querySelector('.filter-search');
-
+    const [text, setText] = useState<string>('');
+    const location = useLocation();
+    const inputText = (e: React.FormEvent<HTMLInputElement>) =>{
+        setText(e.currentTarget.value);
+    }
+    const clickFound = () =>{
+        if(location.pathname === "/vacancies" && setUrl){
+            setUrl();
+        }
+    }
     function search() {
         blockSearch?.classList.toggle('close');
         tringle?.classList.toggle('close-tringle');
@@ -51,12 +65,13 @@ export function Header() {
             <div className="block-search">
                 <div className="search-wrapper">
                     <div className="search search-btn">
-                        <input className="search-inpute" type="text" placeholder="Профессия, должность или компания" />
+                        <input className="search-inpute" type="text" placeholder="Профессия, должность или компания" onChange={e => inputText(e)} value={text}/>
                     </div>
-                    <button className="btn-search">Найти</button>
-                    <button className="filter-search">
+                    {location.pathname === "/vacancies" && <button className="btn-search" onClick={clickFound}>Найти</button>}
+                    {location.pathname !== "/vacancies" && <Link to={`/vacancies?text=${text}`}><button className="btn-search">Найти</button></Link>}
+                    {location.pathname !== "/vacancies" && <Link to={`/vacancies?text=${text}`}><button className="filter-search">
                         <img className="filter-icon" src={filter} alt="" />
-                    </button>
+                    </button></Link>}
                 </div>
             </div>
         </header>
