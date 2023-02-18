@@ -68,3 +68,17 @@ export const getRequestVacancies = async (value = '') => {
         console.log('error', error);
     }
 }
+
+export const getRequestEmployers = async (value = '') => {
+    try {
+        const response = await fetch(`${BASIC_URL}/${response_name.employers}${value ? setParamId(value) : ''}`, {
+            headers: {
+                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
+            }
+        }
+        )
+        return await response.json();
+    } catch (error) {
+        console.log('error', error);
+    }
+}

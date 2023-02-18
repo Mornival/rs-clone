@@ -1,16 +1,35 @@
 import { IData } from '../../../types/interfaces';
+import { useEffect, useState } from 'react';
 
 export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     const { employer } = props;
 
-    let validImg = '';
-    let addClassImg = false;
+    const [state, setState] = useState<{
+        image: string;
+        valid: boolean;
+    }>({
+        image: '',
+        valid: false,
+    });
 
-    if (employer && employer.logo_urls !== null) {
-        validImg = employer?.logo_urls[240] || employer?.logo_urls[90];
-    } else {
-        addClassImg = true;
-    }
+    useEffect(() => {
+        if (employer && employer.logo_urls !== undefined && employer.logo_urls !== null) {
+            const img = employer?.logo_urls[240] || employer?.logo_urls[90];
+            setState((previousState) => {
+                return {
+                    ...previousState,
+                    image: img,
+                };
+            });
+        } else {
+            setState((previousState) => {
+                return {
+                    ...previousState,
+                    valid: true,
+                };
+            });
+        }
+    }, []);
 
-    return <img src={validImg} alt={employer?.name} className="des-brend__img" data-valid={addClassImg} />;
+    return <img src={state.image} alt={employer?.name} className="des-brend__img" data-valid={state.valid} />;
 };

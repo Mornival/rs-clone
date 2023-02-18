@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { DescriptionPages, loader } from './pages/description';
 import { Layout } from './components/Layout';
 import { NotFound } from './pages/notFound';
+import { EmpoloyersPages, loaderEmployers } from './pages/employers';
 
 export const App = () => {
     const [url, toggleUrl] = useState(defaultUrl.url);
@@ -19,6 +20,7 @@ export const App = () => {
                 <Route index element={<Vacancies />} />
                 <Route path="vacancies" element={<VacanciesPages />} />
                 <Route path="vacancies/:id" element={<DescriptionPages />} loader={loader} />
+                <Route path="employers/:id" element={<EmpoloyersPages />} loader={loaderEmployers} />
             </Route>
         )
     );
