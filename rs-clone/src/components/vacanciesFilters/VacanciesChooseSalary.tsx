@@ -1,24 +1,127 @@
-import { IItems } from "../../types/interfaces";
-import { AddPartOfQuery } from "./addPartOfQuery";
 import { response_name } from '../../types/enum';
+import { useEffect } from 'react';
+import urlContext from "../../context/historyURL";
+import { useContext } from 'react';
 import qs from 'qs';
 interface IProps {
     name: string
 }
 export const VacanciesChooseSalary = (props: IProps) => {
-    let name = props.name;
-    const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
+    let name: string = props.name;
+    let checkStatus: boolean = false;
+    let checkStatusRadio: boolean = false;
+    const {url, setUrl} = useContext(urlContext);
+    let defaultSum: string = "";
+    let paramCheckBox: string = "only_with_salary=true";
+    const queryParamBox = qs.parse(paramCheckBox);
+    const queryString: string = window.location.search.substring(1);
+    const queryObj: qs.ParsedQs = qs.parse(queryString);
+    if(queryObj){
+        if(queryObj[`only_with_salary`]){
+            checkStatus = true;
+        } else {
+            checkStatus = false;
+        }
+        if(queryObj[`set_salary`]){
+            checkStatusRadio = true;
+            if(queryObj['salary']){
+                defaultSum = queryObj['salary'] as string;
+            }
+        }
+    }
+    const clickCheckbox = () => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        console.log(queryObj);
+        queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
+        window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+        if(setUrl){
+            setUrl();
+        }
     }
+    const clickSalary = () => {
+        const elemInput: HTMLInputElement|null = document.getElementById("own-salary") as HTMLInputElement;
+        const queryString: string = window.location.search.substring(1);
+        const queryObj: qs.ParsedQs = qs.parse(queryString);
+        if(elemInput){
+            if(!elemInput.checked){
+                delete queryObj["salary"];
+                queryObj[`set_salary`] = "true";
+                elemInput.checked = true;
+                window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+            }
+        }
+    }
+    const clickRadio = () => {
+        const queryString: string = window.location.search.substring(1);
+        const queryObj: qs.ParsedQs = qs.parse(queryString);
+        if(!queryObj[`set_salary`]){
+            delete queryObj["salary"];
+        }
+        if (!queryObj[`set_salary`]) {
+            queryObj[`set_salary`] = "true";
+        }
+        const input = document.getElementById(`own-salary-input`);
+        input?.focus();
+        window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+    }
+    const inputSalary = (e: React.FormEvent<HTMLInputElement>) =>{
+        if(e.currentTarget.value.length > 9){
+            e.currentTarget.value = e.currentTarget.value.substring(0, e.currentTarget.value.length - 1);
+        }
+        if(+e.currentTarget.value === 0){
+            e.currentTarget.value = "";
+        }
+        if (e.currentTarget.value.charCodeAt((e.currentTarget.value.length - 1)) < 48 ||
+            e.currentTarget.value.charCodeAt((e.currentTarget.value.length - 1)) > 57) {
+            e.currentTarget.value = e.currentTarget.value.substring(0, e.currentTarget.value.length - 1);
+        }
+        if(+e.currentTarget.value === 0){
+            e.currentTarget.value = "";
+        }
+    }
+    const clickFind = () =>{
+        if(!url){
+            const queryString: string = window.location.search.substring(1);
+            const queryObj: qs.ParsedQs = qs.parse(queryString);
+            const elemInput: HTMLInputElement | null = document.getElementById(`own-salary-input`) as HTMLInputElement;
+            if(queryObj && elemInput){
+                let startValue: number = 0;
+                if(queryObj["salary"]){
+                    startValue = +queryObj["salary"];
+                }
+                queryObj["salary"] = elemInput.value;
+                if(+queryObj["salary"] > 0 && startValue !== +queryObj["salary"]){
+                    window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+                    if(setUrl){
+                        setUrl();
+                    }
+                }
+            }
+        }
+    }
+    useEffect(() => {
+        const queryString: string = window.location.search.substring(1);
+        const elem: HTMLInputElement|null = document.getElementById("Указан") as HTMLInputElement;
+        if (elem.checked && queryParamBox[`only_with_salary`] && !queryString.includes((queryParamBox[`only_with_salary`] as string))) {
+            elem.checked = false;
+        }
+    }, [url]);
     return (
-        <div className="vacancy-filter-own-salary">
-            <div>
-                <input type="radio" name={name} onClick={e => clickRadio(e)}/>
-                <label>Своя зарплата</label>
+        <>
+            <div className="vacancy-filter-line" key={"Указан Доход"}>
+                <input type="checkbox" id={"Указан"} onClick={clickCheckbox} defaultChecked={checkStatus} />
+                <p>{"Указан доход"}</p>
             </div>
-            <input type="text" className="vacancies-own-salary" placeholder={`20000`}/>
-        </div>
+            <div className="vacancy-filter-own-salary">
+                <div>
+                    <input id={"own-salary"}type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio}/>
+                    <label>Своя зарплата</label>
+                </div>
+                <div className="vacancies-filter-salary-input">
+                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 2000`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum}/>
+                    <button className="own-salary-button" onClick={clickFind}>Найти</button>
+                </div>
+            </div>
+        </>
     )
 }

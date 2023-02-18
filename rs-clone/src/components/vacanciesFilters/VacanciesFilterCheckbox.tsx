@@ -66,7 +66,7 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="checkbox" id={item.name} onClick={e => clickRadio(e)}  defaultChecked={checkStatus}/>
+            <input type="checkbox" id={item.name} onClick={e => clickRadio(e)}  defaultChecked={checkStatus} disabled={url}/>
             <p>{item.name}</p>
             <p className="vacancy-filter-text-hidden">{item.count}</p>
         </div>

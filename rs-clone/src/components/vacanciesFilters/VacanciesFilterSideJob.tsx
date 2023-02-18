@@ -13,7 +13,7 @@ export const VacanciesFilterSideJob = (props: IProps) => {
         <>
         <h2>{clusters.name !== "Профобласть" && clusters.name}</h2>
         <div className="vacancy-filter-element">
-            <form id={clusters.name}>
+            <form id={clusters.name} onSubmit={e => e.preventDefault()}>
                 {clusters.items.map((v, i) =>{
                     if(clusters.name !== "Профобласть"){
                         if(clusters.name === 'Уровень дохода'){

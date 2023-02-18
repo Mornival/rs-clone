@@ -93,7 +93,8 @@ export const VacanciesPages = () => {
             requestFilters = true;
             getFilters();
         }
-        if (obj) {
+        if (obj  && setUrl) {
+            setUrl();
             requestVacancies = false;
             setRender(true);
         }
@@ -105,8 +106,7 @@ export const VacanciesPages = () => {
         }
     }, [filterObj]);
     useEffect(() => {
-        if (url && setUrl) {
-            setUrl();
+        if (url) {
             setRender(false);
             setObj(undefined);
         }
@@ -135,7 +135,7 @@ export const VacanciesPages = () => {
                     )}
                 </main>
             )}
-            {(!render || !renderFilter) && (
+            {(!render && !renderFilter) && (
                 <div className="vacancies-loading-block">
                     <h2 className="vacancies-loading-h2">Loading...</h2>
                 </div>

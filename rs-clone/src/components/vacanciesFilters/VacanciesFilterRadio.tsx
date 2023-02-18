@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export const VacanciesFilterRadio = (props: IProps) => {
-    const {setUrl} = useContext(urlContext);
+    const {url, setUrl} = useContext(urlContext);
     let item = props.props;
     let name = props.name;
     let idItem: string = props.id;
@@ -20,23 +20,34 @@ export const VacanciesFilterRadio = (props: IProps) => {
     const queryParam = qs.parse(param);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
+    if(idItem === "salary"){
+        delete queryObj[`set_salary`];
+    }
     if(queryObj){
         if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
             checkStatus = true;
         }
     }
     const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
-        const queryString: string = window.location.search.substring(1);
-        const queryObj: qs.ParsedQs = qs.parse(queryString);
-        queryObj[`${idItem}`] = queryParam[`${idItem}`];
-        window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
-        if(setUrl){
-            setUrl();
+        if(!url){
+            const queryString: string = window.location.search.substring(1);
+            const queryObj: qs.ParsedQs = qs.parse(queryString);
+            queryObj[`${idItem}`] = queryParam[`${idItem}`];
+            if(idItem === "salary"){
+                delete queryObj[`set_salary`];
+            }
+            window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+            if(setUrl){
+                setUrl();
+            }
+        } else {
+            console.log(e.currentTarget.checked);
+            e.currentTarget.checked = false;
         }
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus}/>
+            <input type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus} disabled={url}/>
             <p>{item.name}</p>
             <p className="vacancy-filter-text-hidden">{item.count}</p>
         </div>
