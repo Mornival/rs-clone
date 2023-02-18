@@ -31,7 +31,7 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
 
             <li className="descriptions__top-item descriptions__top-item--employer">
                 <div className="descriptions__top-item_info top-info">
-                    <h3 className="top-info__title">{contactsEmployer ? contactsEmployer.name : 'Загрузка...'}</h3>
+                    <h3 className="top-info__title">{contactsEmployer ? contactsEmployer.name : 'Данные не указаны'}</h3>
 
                     <address className="top-info__address">
                         <ul className="top-info__phone-box">
@@ -48,9 +48,9 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
                                           </a>
                                       </li>
                                   ))
-                                : 'Загрузка...'}
+                                : ''}
                         </ul>
-                        {contactsEmployer ? getValidEmail(contactsEmployer.email) : 'Загрузка...'}
+                        {contactsEmployer ? getValidEmail(contactsEmployer.email) : ''}
                     </address>
                 </div>
 

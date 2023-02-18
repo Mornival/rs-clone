@@ -19,6 +19,10 @@ export interface IData {
     key_skills: [{
         [key: string]: string
     }]
+    snippet: {
+        requirement: string,
+        responsibility: string
+    }
 }
 
 interface ISalary {
