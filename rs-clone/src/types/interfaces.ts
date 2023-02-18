@@ -56,6 +56,13 @@ export interface IEmployer {
     trusted: boolean;
     url: string;
     vacancies_url: string;
+    area: IArea;
+    site_url: string;
+    open_vacancies: number;
+    industries: {
+        id: string,
+        name: string
+    }[]
 }
 
 interface IAddress {

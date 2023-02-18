@@ -1,9 +1,10 @@
 import { IData } from '../../../types/interfaces';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     const { employer } = props;
-
+    console.log(props);
     const [state, setState] = useState<{
         image: string;
         valid: boolean;
@@ -31,5 +32,9 @@ export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
         }
     }, []);
 
-    return <img src={state.image} alt={employer?.name} className="des-brend__img" data-valid={state.valid} />;
+    return (
+        <Link className="des-brend__link" to={`/employers/${employer?.id}`}>
+            <img className="des-brend__img" src={state.image} alt={employer?.name} data-valid={state.valid} />
+        </Link>
+    );
 };
