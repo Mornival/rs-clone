@@ -42,7 +42,7 @@ export const DescriptionContact = (props: { data: IData }) => {
                                       </a>
                                   </li>
                               ))
-                            : ''}
+                            : 'Данные не указаны'}
                     </ul>
                     {contactsEmployer ? getValidEmail(contactsEmployer.email) : ''}
                 </address>
