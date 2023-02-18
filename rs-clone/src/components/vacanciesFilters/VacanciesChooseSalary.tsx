@@ -10,21 +10,21 @@ export const VacanciesChooseSalary = (props: IProps) => {
     let name: string = props.name;
     let checkStatus: boolean = false;
     let checkStatusRadio: boolean = false;
-    const {url, setUrl} = useContext(urlContext);
+    const { url, setUrl } = useContext(urlContext);
     let defaultSum: string = "";
     let paramCheckBox: string = "only_with_salary=true";
     const queryParamBox = qs.parse(paramCheckBox);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
-    if(queryObj){
-        if(queryObj[`only_with_salary`]){
+    if (queryObj) {
+        if (queryObj[`only_with_salary`]) {
             checkStatus = true;
         } else {
             checkStatus = false;
         }
-        if(queryObj[`set_salary`]){
+        if (queryObj[`set_salary`]) {
             checkStatusRadio = true;
-            if(queryObj['salary']){
+            if (queryObj['salary']) {
                 defaultSum = queryObj['salary'] as string;
             }
         }
@@ -33,28 +33,28 @@ export const VacanciesChooseSalary = (props: IProps) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
-        window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
-        if(setUrl){
+        window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+        if (setUrl) {
             setUrl();
         }
     }
     const clickSalary = () => {
-        const elemInput: HTMLInputElement|null = document.getElementById("own-salary") as HTMLInputElement;
+        const elemInput: HTMLInputElement | null = document.getElementById("own-salary") as HTMLInputElement;
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        if(elemInput){
-            if(!elemInput.checked){
+        if (elemInput) {
+            if (!elemInput.checked) {
                 delete queryObj["salary"];
                 queryObj[`set_salary`] = "true";
                 elemInput.checked = true;
-                window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+                window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
             }
         }
     }
     const clickRadio = () => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        if(!queryObj[`set_salary`]){
+        if (!queryObj[`set_salary`]) {
             delete queryObj["salary"];
         }
         if (!queryObj[`set_salary`]) {
@@ -62,37 +62,37 @@ export const VacanciesChooseSalary = (props: IProps) => {
         }
         const input = document.getElementById(`own-salary-input`);
         input?.focus();
-        window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+        window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
     }
-    const inputSalary = (e: React.FormEvent<HTMLInputElement>) =>{
-        if(e.currentTarget.value.length > 9){
+    const inputSalary = (e: React.FormEvent<HTMLInputElement>) => {
+        if (e.currentTarget.value.length > 9) {
             e.currentTarget.value = e.currentTarget.value.substring(0, e.currentTarget.value.length - 1);
         }
-        if(+e.currentTarget.value === 0){
+        if (+e.currentTarget.value === 0) {
             e.currentTarget.value = "";
         }
         if (e.currentTarget.value.charCodeAt((e.currentTarget.value.length - 1)) < 48 ||
             e.currentTarget.value.charCodeAt((e.currentTarget.value.length - 1)) > 57) {
             e.currentTarget.value = e.currentTarget.value.substring(0, e.currentTarget.value.length - 1);
         }
-        if(+e.currentTarget.value === 0){
+        if (+e.currentTarget.value === 0) {
             e.currentTarget.value = "";
         }
     }
-    const clickFind = () =>{
-        if(!url){
+    const clickFind = () => {
+        if (!url) {
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
             const elemInput: HTMLInputElement | null = document.getElementById(`own-salary-input`) as HTMLInputElement;
-            if(queryObj && elemInput){
+            if (queryObj && elemInput) {
                 let startValue: number = 0;
-                if(queryObj["salary"]){
+                if (queryObj["salary"]) {
                     startValue = +queryObj["salary"];
                 }
                 queryObj["salary"] = elemInput.value;
-                if(+queryObj["salary"] > 0 && startValue !== +queryObj["salary"]){
-                    window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
-                    if(setUrl){
+                if (+queryObj["salary"] > 0 && startValue !== +queryObj["salary"]) {
+                    window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+                    if (setUrl) {
                         setUrl();
                     }
                 }
@@ -101,7 +101,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
     }
     useEffect(() => {
         const queryString: string = window.location.search.substring(1);
-        const elem: HTMLInputElement|null = document.getElementById("Указан") as HTMLInputElement;
+        const elem: HTMLInputElement | null = document.getElementById("Указан") as HTMLInputElement;
         if (elem.checked && queryParamBox[`only_with_salary`] && !queryString.includes((queryParamBox[`only_with_salary`] as string))) {
             elem.checked = false;
         }
@@ -109,16 +109,19 @@ export const VacanciesChooseSalary = (props: IProps) => {
     return (
         <>
             <div className="vacancy-filter-line" key={"Указан Доход"}>
-                <input type="checkbox" id={"Указан"} onClick={clickCheckbox} defaultChecked={checkStatus} />
-                <p>{"Указан доход"}</p>
+                <label htmlFor={"Указан"}>
+                    <input className="checkbox" type="checkbox" id={"Указан"} onClick={clickCheckbox} defaultChecked={checkStatus} disabled={url} />
+                    <span className="fake"></span>
+                    <span>{"Указан доход"}</span>
+                </label>
             </div>
             <div className="vacancy-filter-own-salary">
                 <div>
-                    <input id={"own-salary"}type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio}/>
+                    <input id={"own-salary"} type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio} />
                     <label>Своя зарплата</label>
                 </div>
                 <div className="vacancies-filter-salary-input">
-                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 2000`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum}/>
+                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 2000`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum} />
                     <button className="own-salary-button" onClick={clickFind}>Найти</button>
                 </div>
             </div>

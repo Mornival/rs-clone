@@ -11,11 +11,14 @@
         }
     }
     .vacancies-filter-block{
-        width:300px;
+        min-width:300px;
+        max-width:300px;
         position: sticky; 
         bottom: 0;
         margin-left:10px;
         h2{
+            color:grey;
+            font-size:1.8rem;
             margin-left:20px;
         }
     }
