@@ -6,6 +6,11 @@ export const VacanciesResetFilters = () => {
     const { setUrl } = useContext(urlContext);
     const resetFilters = () => {
         window.history.replaceState(null, 'vacancies', `${response_name.vacancies}`);
+        console.log(window.location.search);
+        const inputSalary: HTMLInputElement|null = document.getElementById("own-salary-input") as HTMLInputElement;
+        if(inputSalary){
+            inputSalary.value = "";
+        }
         if(setUrl){
             setUrl();
         }

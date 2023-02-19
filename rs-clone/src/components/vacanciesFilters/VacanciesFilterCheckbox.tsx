@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import urlContext from "../../context/historyURL";
 import { cleaningQs } from "./cleaningQS";
 import { useEffect } from 'react';
-
+//&& (queryObj[`${idItem}`] as string[]).includes((queryParam[`${idItem}`] as string))
 interface IProps {
     props: IItems,
     name: string,
@@ -19,12 +19,15 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     let idItem: string = props.id;
     const {url, setUrl} = useContext(urlContext);
     let checkStatus: boolean = false;
-    const param: string = AddPartOfQuery(item);
+    let param: string = AddPartOfQuery(item);
     const queryParam = qs.parse(param);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
     if(queryObj){
-        if(queryObj[`${idItem}`] && queryObj[`${idItem}`] === queryParam[`${idItem}`]){
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
+        if(queryObj[`${idItem}`] && (queryObj[`${idItem}`] === queryParam[`${idItem}`] || ((queryObj[`${idItem}`] as string[]).includes((queryParam[`${idItem}`] as string))))){
             checkStatus = true;
         }
     }
@@ -35,19 +38,25 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
             elem.checked = false;
         }
     }, [url]);
-    const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
+    const clickCheckbox= (e: React.FormEvent<HTMLInputElement>) => {
         let queryString: string = window.location.search.substring(1);
         let queryObj: qs.ParsedQs = qs.parse(queryString);
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
         if(!queryObj[`${idItem}`]){
             queryObj[`${idItem}`] = queryParam[`${idItem}`];
-        } else if(queryObj[`${idItem}`]){
-            if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
-                delete queryObj[`${idItem}`];
-            } else {
+        } else if(queryObj[`${idItem}`] && e.currentTarget.checked){
                 queryString += `&${idItem}=${queryParam[`${idItem}`]}`
                 queryObj = qs.parse(queryString);
+        } else if(queryObj[`${idItem}`] && !e.currentTarget.checked && !Array.isArray(queryObj[`${idItem}`])){
+            if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
+                console.log("1");
+                delete queryObj[`${idItem}`];
             }
-        } else if(queryObj[`${idItem}`] && Array.isArray(queryObj[`${idItem}`]) && queryParam[`${idItem}`] && queryString.includes((queryParam[`${idItem}`] as string))){
+        } else if(queryObj[`${idItem}`] && Array.isArray(queryObj[`${idItem}`]) && queryParam[`${idItem}`]
+        && (queryObj[`${idItem}`] as string[]).includes((queryParam[`${idItem}`] as string))
+        && !e.currentTarget.checked){
             if((queryObj[`${idItem}`] as string[])){
                 let obj:(string | undefined)[] = (queryObj[`${idItem}`] as string[]).map((v) =>{
                     if(v !== queryParam[`${idItem}`]){
@@ -66,9 +75,12 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="checkbox" id={item.name} onClick={e => clickRadio(e)}  defaultChecked={checkStatus}/>
-            <p>{item.name}</p>
-            <p className="vacancy-filter-text-hidden">{item.count}</p>
+            <label htmlFor={item.name}>
+                <input className="checkbox" type="checkbox" id={item.name} onClick={e => clickCheckbox(e)}  defaultChecked={checkStatus} disabled={url}/>
+                <span className="fake"></span>
+                <span>{item.name}</span>
+                <span className="vacancy-filter-text-hidden">{item.count}</span>
+            </label>
         </div>
     )
 }

@@ -8,12 +8,19 @@ export const VacancySmallDescription = (data: IProps) => {
     let vacancy: IItem = data.props;
     let currency: string = 'y.e';
     if (vacancy.salary) {
+        currency = vacancy.salary.currency;
         if (vacancy.salary.currency === 'RUR') {
             currency = 'руб.';
         } else if (vacancy.salary.currency === 'BYR') {
             currency = 'бел. руб.';
+        } else if (vacancy.salary.currency === 'USD'){
+            currency = 'долл. США';
+        } else if (vacancy.salary.currency === 'KZT'){
+            currency = 'тенге';
+        } else {
+            currency = vacancy.salary.currency;
         }
-    }
+    } 
     return (
         <>
             <div className="vacancy-small-description">
@@ -26,6 +33,7 @@ export const VacancySmallDescription = (data: IProps) => {
                         {vacancy.salary.from}
                         {vacancy.salary.from && vacancy.salary.to && ' - '}
                         {vacancy.salary.to} {currency}
+                        {vacancy.salary.gross && " C возможностью увеличения ЗП"}
                     </h3>
                 )}
                 {vacancy.employer?.logo_urls && (
