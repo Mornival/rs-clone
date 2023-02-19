@@ -17,8 +17,9 @@ export const VacanciesChooseSalary = (props: IProps) => {
     const queryParamBox = qs.parse(paramCheckBox);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
+    const inputArea: HTMLInputElement | null = document.getElementById('own-salary-input') as HTMLInputElement;
     if (queryObj) {
-        if(queryObj["page"]){
+        if (queryObj["page"]) {
             delete queryObj["page"];
         }
         if (queryObj[`only_with_salary`]) {
@@ -31,17 +32,19 @@ export const VacanciesChooseSalary = (props: IProps) => {
             if (queryObj['salary']) {
                 defaultSum = queryObj['salary'] as string;
             }
+        } else {
+            checkStatusRadio = false;
         }
     }
     const clickCheckbox = (e: React.FormEvent<HTMLInputElement>) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        if(e.currentTarget.checked){
+        if (e.currentTarget.checked) {
             queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
         } else {
             delete queryObj[`only_with_salary`];
         }
-        window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+        window.history.replaceState(null, '', `${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
         if (setUrl) {
             setUrl();
         }
@@ -55,7 +58,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
                 delete queryObj["salary"];
                 queryObj[`set_salary`] = "true";
                 elemInput.checked = true;
-                window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+                window.history.replaceState(null, '', `${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
             }
         }
     }
@@ -70,7 +73,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
         }
         const input = document.getElementById(`own-salary-input`);
         input?.focus();
-        window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+        window.history.replaceState(null, '', `${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
     }
     const inputSalary = (e: React.FormEvent<HTMLInputElement>) => {
         if (e.currentTarget.value.length > 9) {
@@ -88,7 +91,9 @@ export const VacanciesChooseSalary = (props: IProps) => {
         }
     }
     const clickFind = () => {
-        if (!url) {
+        const inputArea: HTMLInputElement | null = document.getElementById('own-salary-input') as HTMLInputElement;
+        console.log(inputArea)
+        if (!url && inputArea.value) {
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
             const elemInput: HTMLInputElement | null = document.getElementById(`own-salary-input`) as HTMLInputElement;
@@ -99,11 +104,23 @@ export const VacanciesChooseSalary = (props: IProps) => {
                 }
                 queryObj["salary"] = elemInput.value;
                 if (+queryObj["salary"] > 0 && startValue !== +queryObj["salary"]) {
-                    window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+                    window.history.replaceState(null, '', `${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
                     if (setUrl) {
                         setUrl();
                     }
                 }
+            }
+        }
+    }
+    const clickClearSalary = (e: React.FormEvent<HTMLInputElement>) => {
+        const queryString: string = window.location.search.substring(1);
+        const queryObj: qs.ParsedQs = qs.parse(queryString);
+        if (e.currentTarget.checked) {
+            delete queryObj["salary"];
+            delete queryObj["set_salary"];
+            window.history.replaceState(null, '', `${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+            if (setUrl) {
+                setUrl();
             }
         }
     }
@@ -123,13 +140,23 @@ export const VacanciesChooseSalary = (props: IProps) => {
                     <span>{"Указан доход"}</span>
                 </label>
             </div>
-            <div className="vacancy-filter-own-salary">
+            <div className="vacancy-filter-own-salary vacancy-filter-line">
                 <div>
-                    <input id={"own-salary"} type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio} />
-                    <label>Своя зарплата</label>
+                    <label>
+                        <input className="radio" id={"dont-worry-about-salary"} onClick={e => clickClearSalary(e)} type="radio" name={name} defaultChecked={!queryObj["salary"]} />
+                        <span className="fake-radio"></span>
+                        <span>Не имеет значения</span>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input className="radio" id={"own-salary"} type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio} />
+                        <span className="fake-radio"></span>
+                        <span>Своя зарплата</span>
+                    </label>
                 </div>
                 <div className="vacancies-filter-salary-input">
-                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 2000`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum} />
+                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 20000 руб`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum} />
                     <button className="own-salary-button" onClick={clickFind}>Найти</button>
                 </div>
             </div>

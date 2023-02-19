@@ -53,6 +53,41 @@
             transition: .2s;
         }
     }
+    .radio:checked + .fake-radio::before{
+        opacity: 1;
+    }
+    .radio:checked + .fake-radio{
+        background: #1785e5;
+        border:1px #1785e5 solid;
+    }
+    .radio:disabled + .fake-radio{
+        opacity:0.5;
+    }
+    .radio{
+        display: none;
+    }
+    .fake-radio{
+        display: inline-block;
+        width:20px;
+        height:20px;
+        margin-right:5px;
+        border:1px grey solid;
+        border-radius:50%;
+        position:relative;
+        &::before{
+            content:"";
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+            width:10px;
+            height:10px;
+            border-radius:50%;
+            background: white;
+            opacity:0;
+            transition: .2s;
+        }
+    }
 }
 .vacancy-filter-own-salary{
     display: flex;

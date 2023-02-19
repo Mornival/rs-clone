@@ -50,9 +50,12 @@ export const VacanciesFilterRadio = (props: IProps) => {
     }
     return (
         <div className="vacancy-filter-line" key={item.name}>
-            <input type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus} disabled={url}/>
-            <p>{item.name}</p>
-            <p className="vacancy-filter-text-hidden">{item.count}</p>
+            <label>
+                <input className="radio" type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus} disabled={url} />
+                <span className="fake-radio"></span>
+                <span>{item.name}</span>
+                <span className="vacancy-filter-text-hidden">{item.count}</span>
+            </label>
         </div>
     )
 }

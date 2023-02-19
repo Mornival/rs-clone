@@ -33,6 +33,7 @@ export const VacancySmallDescription = (data: IProps) => {
                         {vacancy.salary.from}
                         {vacancy.salary.from && vacancy.salary.to && ' - '}
                         {vacancy.salary.to} {currency}
+                        {vacancy.salary.gross && " C возможностью увеличения ЗП"}
                     </h3>
                 )}
                 {vacancy.employer?.logo_urls && (
