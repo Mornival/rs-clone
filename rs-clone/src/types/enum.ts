@@ -1,3 +1,4 @@
 export enum response_name {
-    vacancies = 'vacancies'
+    vacancies = 'vacancies',
+    employers = 'employers'
 }

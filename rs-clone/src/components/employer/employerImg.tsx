@@ -1,9 +1,9 @@
-import { IData } from '../../../types/interfaces';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { IEmployer } from '../../types/interfaces';
 
-export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
-    const { employer } = props;
+export const EmpImg: React.FC<{ data: IEmployer }> = (props) => {
+    const { data } = props;
+    
     const [state, setState] = useState<{
         image: string;
         valid: boolean;
@@ -13,8 +13,8 @@ export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     });
 
     useEffect(() => {
-        if (employer && employer.logo_urls !== undefined && employer.logo_urls !== null) {
-            const img = employer?.logo_urls[240] || employer?.logo_urls[90];
+        if (data && data.logo_urls !== undefined && data.logo_urls !== null) {
+            const img = data?.logo_urls[240] || data?.logo_urls[90];
             setState((previousState) => {
                 return {
                     ...previousState,
@@ -31,9 +31,5 @@ export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
         }
     }, []);
 
-    return (
-        <Link className="des-brend__link" to={`/employers/${employer?.id}`}>
-            <img className="des-brend__img" src={state.image} alt={employer?.name} data-valid={state.valid} />
-        </Link>
-    );
+    return <img className="employer__img" src={state.image} alt={data?.name} data-valid={state.valid} />;
 };

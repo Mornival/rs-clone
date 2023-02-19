@@ -1,4 +1,18 @@
 .des-brend {
+    display: flex;
+    flex-direction: column;
+
+    &__link {
+        align-self: flex-start;
+        border: 1px solid transparent;
+        transition: transform 0.5s ease-in-out, border 0.5s ease-in-out;
+
+        &:hover {
+            transform: perspective(20rem) rotateY(-15deg) translateZ(4px);
+            border: 1px solid var(--gray);
+        }
+    }
+
     &__img {
         &[data-valid="true"] {
             display: none;
@@ -13,7 +27,35 @@
     }
 
     &__title {
+        position: relative;
         font-size: 2.4rem;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            transition: width 0.5s ease-in-out;
+        }
+
+        &::before {
+            right: 50%;
+            background-color: var(--green-200);
+        }
+
+        &::after {
+            left: 50%;
+            background-color: var(--blue-300);
+        }
+
+        &:hover {
+            &::before,
+            &::after {
+                width: 50%;
+            }
+        }
     }
 
     &__valid {

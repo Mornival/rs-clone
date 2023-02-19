@@ -7,7 +7,7 @@ import { DesName } from './desName';
 
 export const DescriptionTitle = (props: { data: IData }) => (
     <div className="descriptions__top">
-        <DesName param={props.data?.name} />
+        <DesName param={props.data} />
         <VacanciesSalary salary={props.data?.salary} />
         <DesExperience param={props.data?.experience} />
         <DesTimeline schedule={props.data?.schedule} employment={props.data?.employment} />
