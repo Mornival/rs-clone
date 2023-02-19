@@ -30,6 +30,12 @@ export const VacanciesFilterRadio = (props: IProps) => {
         }
         if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
             checkStatus = true;
+        } else {
+            const elemInput: HTMLInputElement | null = document.getElementById(`${item.count}`) as HTMLInputElement;
+            if(elemInput){
+                elemInput.checked = false;
+            }
+            checkStatus = false;
         }
     }
     const clickRadio = (e: React.FormEvent<HTMLInputElement>) => {
@@ -37,6 +43,9 @@ export const VacanciesFilterRadio = (props: IProps) => {
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
             queryObj[`${idItem}`] = queryParam[`${idItem}`];
+            if(queryObj["page"]){
+                delete queryObj["page"];
+            }
             if(idItem === "salary"){
                 delete queryObj[`set_salary`];
             }
@@ -51,7 +60,7 @@ export const VacanciesFilterRadio = (props: IProps) => {
     return (
         <div className="vacancy-filter-line" key={item.name}>
             <label>
-                <input className="radio" type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus} disabled={url} />
+                <input className="radio" id={`${item.count}`} type="radio" name={name} onClick={e => clickRadio(e)} defaultChecked={checkStatus} disabled={url} />
                 <span className="fake-radio"></span>
                 <span>{item.name}</span>
                 <span className="vacancy-filter-text-hidden">{item.count}</span>

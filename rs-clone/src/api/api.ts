@@ -26,7 +26,6 @@ export const REQUEST_VACANCIES = async () => {
         if (window.location.search.length === 0) {
             window.history.replaceState(null, 'vacancies', `?`);
         }
-        console.log(`https://api.hh.ru/vacancies?${window.location.search}`);
         const RESPONSE = await fetch(`https://api.hh.ru/vacancies${window.location.search}`, {})
         if (!RESPONSE.ok) throw new Error('Страница не загружена');
         return await RESPONSE.json();

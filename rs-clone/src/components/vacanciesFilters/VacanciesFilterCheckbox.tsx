@@ -41,6 +41,9 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     const clickCheckbox= (e: React.FormEvent<HTMLInputElement>) => {
         let queryString: string = window.location.search.substring(1);
         let queryObj: qs.ParsedQs = qs.parse(queryString);
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
         if(!queryObj[`${idItem}`]){
             queryObj[`${idItem}`] = queryParam[`${idItem}`];
         } else if(queryObj[`${idItem}`] && e.currentTarget.checked){

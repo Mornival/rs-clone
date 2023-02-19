@@ -53,6 +53,9 @@
             transition: .2s;
         }
     }
+    .radio{
+        display: none;
+    }
     .radio:checked + .fake-radio::before{
         opacity: 1;
     }
@@ -62,9 +65,6 @@
     }
     .radio:disabled + .fake-radio{
         opacity:0.5;
-    }
-    .radio{
-        display: none;
     }
     .fake-radio{
         display: inline-block;

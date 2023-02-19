@@ -26,8 +26,6 @@ export function Header() {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         const input: HTMLInputElement | null = document.querySelector('.search-inpute') as HTMLInputElement;
-        console.log(location.pathname  === "/vacancies");
-        console.log(input);
         if(location.pathname === "/vacancies" && setUrl && input){
             console.log(input.value);
             queryObj["text"] = input.value;
@@ -41,7 +39,6 @@ export function Header() {
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         const input: HTMLInputElement | null = document.querySelector('.search-inpute') as HTMLInputElement;
         if(location.pathname === "/vacancies" && setUrl && input){
-            console.log()
             setText("");
             delete queryObj["text"];
             window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);

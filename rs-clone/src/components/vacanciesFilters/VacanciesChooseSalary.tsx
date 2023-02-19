@@ -11,13 +11,13 @@ export const VacanciesChooseSalary = (props: IProps) => {
     let name: string = props.name;
     let checkStatus: boolean = false;
     let checkStatusRadio: boolean = false;
+    let checkBaseInput: boolean = false;
     const { url, setUrl } = useContext(urlContext);
     let defaultSum: string = "";
     let paramCheckBox: string = "only_with_salary=true";
     const queryParamBox = qs.parse(paramCheckBox);
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
-    const inputArea: HTMLInputElement | null = document.getElementById('own-salary-input') as HTMLInputElement;
     if (queryObj) {
         if (queryObj["page"]) {
             delete queryObj["page"];
@@ -34,6 +34,13 @@ export const VacanciesChooseSalary = (props: IProps) => {
             }
         } else {
             checkStatusRadio = false;
+        }
+        if(!queryObj[`set_salary`] &&  !queryObj[`salary`]){
+            checkBaseInput = true;
+            const inputBaseSalary: HTMLInputElement|null = document.getElementById("dont-worry-about-salary") as HTMLInputElement;
+            if(inputBaseSalary){
+                inputBaseSalary.checked = true;
+            }
         }
     }
     const clickCheckbox = (e: React.FormEvent<HTMLInputElement>) => {
@@ -143,7 +150,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
             <div className="vacancy-filter-own-salary vacancy-filter-line">
                 <div>
                     <label>
-                        <input className="radio" id={"dont-worry-about-salary"} onClick={e => clickClearSalary(e)} type="radio" name={name} defaultChecked={!queryObj["salary"]} />
+                        <input className="radio" id={"dont-worry-about-salary"} onClick={e => clickClearSalary(e)} type="radio" name={name} defaultChecked={checkBaseInput} />
                         <span className="fake-radio"></span>
                         <span>Не имеет значения</span>
                     </label>
