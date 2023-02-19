@@ -62,7 +62,8 @@ export interface IEmployer {
     industries: {
         id: string,
         name: string
-    }[]
+    }[];
+    description: string;
 }
 
 interface IAddress {

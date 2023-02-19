@@ -30,8 +30,11 @@ export const DescriptionContact = (props: { data: IData }) => {
                 <address className="des-contanct__address">
                     <ul className="des-contanct__phone-box">
                         {arrPhone.length !== 0
-                            ? arrPhone.map(({ city, number, country, formatted }) => (
-                                  <li className="des-contanct__phone" key={formatted}>
+                            ? arrPhone.map(({ city, number, country, formatted }, index) => (
+                                  <li
+                                      className="des-contanct__phone"
+                                      key={country + '-' + city + '-' + number + '-' + index}
+                                  >
                                       <a
                                           className="des-contanct__phone-link"
                                           href={`tel:${formatted}`}

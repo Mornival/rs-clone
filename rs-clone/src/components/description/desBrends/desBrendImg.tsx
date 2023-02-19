@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     const { employer } = props;
-    console.log(props);
     const [state, setState] = useState<{
         image: string;
         valid: boolean;
