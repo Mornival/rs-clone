@@ -24,6 +24,9 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
     if(queryObj){
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
         if(queryObj[`${idItem}`] && (queryObj[`${idItem}`] === queryParam[`${idItem}`] || ((queryObj[`${idItem}`] as string[]).includes((queryParam[`${idItem}`] as string))))){
             checkStatus = true;
         }

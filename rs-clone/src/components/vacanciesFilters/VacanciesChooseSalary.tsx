@@ -18,6 +18,9 @@ export const VacanciesChooseSalary = (props: IProps) => {
     const queryString: string = window.location.search.substring(1);
     const queryObj: qs.ParsedQs = qs.parse(queryString);
     if (queryObj) {
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
         if (queryObj[`only_with_salary`]) {
             checkStatus = true;
         } else {
@@ -30,10 +33,14 @@ export const VacanciesChooseSalary = (props: IProps) => {
             }
         }
     }
-    const clickCheckbox = () => {
+    const clickCheckbox = (e: React.FormEvent<HTMLInputElement>) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
-        queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
+        if(e.currentTarget.checked){
+            queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
+        } else {
+            delete queryObj[`only_with_salary`];
+        }
         window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
         if (setUrl) {
             setUrl();
@@ -111,7 +118,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
         <>
             <div className="vacancy-filter-line" key={"Указан Доход"}>
                 <label htmlFor={"Указан"}>
-                    <input className="checkbox" type="checkbox" id={"Указан"} onClick={clickCheckbox} defaultChecked={checkStatus} disabled={url} />
+                    <input className="checkbox" type="checkbox" id={"Указан"} onClick={e => clickCheckbox(e)} defaultChecked={checkStatus} disabled={url} />
                     <span className="fake"></span>
                     <span>{"Указан доход"}</span>
                 </label>

@@ -25,6 +25,9 @@ export const VacanciesFilterRadio = (props: IProps) => {
         delete queryObj[`set_salary`];
     }
     if(queryObj){
+        if(queryObj["page"]){
+            delete queryObj["page"];
+        }
         if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
             checkStatus = true;
         }
@@ -42,7 +45,6 @@ export const VacanciesFilterRadio = (props: IProps) => {
                 setUrl();
             }
         } else {
-            console.log(e.currentTarget.checked);
             e.currentTarget.checked = false;
         }
     }
