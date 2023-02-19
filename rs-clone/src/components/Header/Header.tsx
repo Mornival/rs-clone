@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 import { useState} from 'react';
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import { response_name } from '../../types/enum';
+import { cleaningQs } from '../vacanciesFilters/cleaningQS';
 import urlContext from "../../context/historyURL";
-
+import qs from 'qs';
 export function Header() {
     const {setUrl} = useContext(urlContext);
     const blockSearch = document.querySelector('.block-search');
@@ -21,8 +23,31 @@ export function Header() {
         setText(e.currentTarget.value);
     }
     const clickFound = () =>{
-        if(location.pathname === "/vacancies" && setUrl){
+        const queryString: string = window.location.search.substring(1);
+        const queryObj: qs.ParsedQs = qs.parse(queryString);
+        const input: HTMLInputElement | null = document.querySelector('.search-inpute') as HTMLInputElement;
+        console.log(location.pathname  === "/vacancies");
+        console.log(input);
+        if(location.pathname === "/vacancies" && setUrl && input){
+            console.log(input.value);
+            queryObj["text"] = input.value;
+            console.log(qs.stringify(queryObj));
+            window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
             setUrl();
+        }
+    }
+    const clickСlear= () =>{
+        const queryString: string = window.location.search.substring(1);
+        const queryObj: qs.ParsedQs = qs.parse(queryString);
+        const input: HTMLInputElement | null = document.querySelector('.search-inpute') as HTMLInputElement;
+        if(location.pathname === "/vacancies" && setUrl && input){
+            console.log()
+            setText("");
+            delete queryObj["text"];
+            window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
+            setUrl();
+        } else {
+            setText("");
         }
     }
     function search() {
@@ -69,6 +94,7 @@ export function Header() {
                     </div>
                     {location.pathname === "/vacancies" && <button className="btn-search" onClick={clickFound}>Найти</button>}
                     {location.pathname !== "/vacancies" && <Link to={`/vacancies?text=${text}`}><button className="btn-search">Найти</button></Link>}
+                    <button className="btn-search btn-clear" onClick={clickСlear}>Очистить</button>
                     {location.pathname !== "/vacancies" && <Link to={`/vacancies?text=${text}`}><button className="filter-search">
                         <img className="filter-icon" src={filter} alt="" />
                     </button></Link>}

@@ -4,6 +4,7 @@ import { response_name } from '../../types/enum';
 import qs from 'qs';
 import { useContext } from 'react';
 import urlContext from "../../context/historyURL";
+import { cleaningQs } from "./cleaningQS";
 interface IProps {
     props: IItems,
     name: string,
@@ -36,7 +37,7 @@ export const VacanciesFilterRadio = (props: IProps) => {
             if(idItem === "salary"){
                 delete queryObj[`set_salary`];
             }
-            window.history.replaceState(null,'',`${response_name.vacancies}?${qs.stringify(queryObj)}`);
+            window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
             if(setUrl){
                 setUrl();
             }

@@ -2,6 +2,7 @@ import { response_name } from '../../types/enum';
 import { useEffect } from 'react';
 import urlContext from "../../context/historyURL";
 import { useContext } from 'react';
+import { cleaningQs } from './cleaningQS';
 import qs from 'qs';
 interface IProps {
     name: string
@@ -33,7 +34,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         queryObj[`only_with_salary`] = queryParamBox[`only_with_salary`];
-        window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+        window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
         if (setUrl) {
             setUrl();
         }
@@ -47,7 +48,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
                 delete queryObj["salary"];
                 queryObj[`set_salary`] = "true";
                 elemInput.checked = true;
-                window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+                window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
             }
         }
     }
@@ -62,7 +63,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
         }
         const input = document.getElementById(`own-salary-input`);
         input?.focus();
-        window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+        window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
     }
     const inputSalary = (e: React.FormEvent<HTMLInputElement>) => {
         if (e.currentTarget.value.length > 9) {
@@ -91,7 +92,7 @@ export const VacanciesChooseSalary = (props: IProps) => {
                 }
                 queryObj["salary"] = elemInput.value;
                 if (+queryObj["salary"] > 0 && startValue !== +queryObj["salary"]) {
-                    window.history.replaceState(null, '', `${response_name.vacancies}?${qs.stringify(queryObj)}`);
+                    window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
                     if (setUrl) {
                         setUrl();
                     }

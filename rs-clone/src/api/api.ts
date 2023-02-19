@@ -20,15 +20,17 @@ export const REQUEST = async (value = '') => {
         console.log('error', error);
     }
 }
-
+//const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/${window.location.search}`
+//https://api.hh.ru/vacancies?search&area=1&area=113
 export const REQUEST_VACANCIES = async () => {
     try {
         if (window.location.search.length === 0) {
-            window.history.replaceState(null, 'vacancies', `${response_name.vacancies}?search`);
+            window.history.replaceState(null, 'vacancies', `?`);
         }
-        const RESPONSE = await fetch(`${BASIC_URL}/${response_name.vacancies}/${window.location.search}`, {
+        console.log(`https://api.hh.ru/vacancies?${window.location.search}`);
+        const RESPONSE = await fetch(`https://api.hh.ru/vacancies${window.location.search}`, {
             headers: {
-                'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
+                // 'Authorization': 'Bearer eye0eXAiOwiJKV1QiLCJhbGciOiJdIUzI1NiJ9'
             }
         }
         )

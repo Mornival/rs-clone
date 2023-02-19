@@ -135,7 +135,7 @@ export const VacanciesPages = () => {
                     )}
                 </main>
             )}
-            {(!render && !renderFilter) && (
+            {!renderFilter && (
                 <div className="vacancies-loading-block">
                     <h2 className="vacancies-loading-h2">Loading...</h2>
                 </div>
