@@ -41,8 +41,8 @@ export const VacancySmallDescription = (data: IProps) => {
                 )}
                 {vacancy.employer?.name && <p>{vacancy.employer?.name}</p>}
                 {vacancy.area && <p className="vacancy-small-area">{vacancy.area.name}</p>}
-                {vacancy.snippet.responsibility && <p>{vacancy.snippet.responsibility}</p>}
-                {vacancy.snippet.requirement && <p>{vacancy.snippet.requirement}</p>}
+                {vacancy.snippet.responsibility && <p dangerouslySetInnerHTML={{ __html:  vacancy.snippet.responsibility}}></p>}
+                {vacancy.snippet.requirement && <p dangerouslySetInnerHTML={{ __html:  vacancy.snippet.requirement}}></p>}
                 <button>Откликнуться</button>
             </div>
         </>
