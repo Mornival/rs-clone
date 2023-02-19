@@ -1,0 +1,33 @@
+.rating {
+    display: flex;
+    column-gap: 2rem;
+    margin-bottom: 2rem;
+
+    &__text {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    &__stars {
+        position: relative;
+        height: 20px;
+        width: 105px;
+        background-image: url("./img//stars.png");
+        background-position: 0 0;
+        background-repeat: repeat-x;
+        margin-right: 5px;
+    }
+
+    &__on {
+        height: 20px;
+        background-image: url("./img//stars.png");
+        background-position: 0 -20px;
+    }
+
+    &__inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+}

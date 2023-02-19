@@ -12,7 +12,7 @@ export interface IData {
         name: string,
         phones: IPhone[];
     } | undefined,
-    employer: IEmployer | undefined;
+    employer: IEmployer;
     address: IAddress | undefined
     description: string | undefined
     branded_description: string | undefined

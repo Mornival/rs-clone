@@ -6,11 +6,16 @@ export const BrendAddress: React.FC<Pick<IData, 'address'>> = (props) => {
     const city = address?.city || '';
     const street = address?.street || '';
     const building = address?.building || '';
+    const raw = address?.raw || '';
 
     let validAddress = '';
 
     if (address) {
-        validAddress = `${city}, ${street} ${building}`;
+        if (city && street && building) {
+            validAddress = `${city} ${street} ${building}`;
+        } else {
+            validAddress = raw;
+        }
     } else if (address === null) {
         validAddress = 'Адрес не указан';
     } else {
