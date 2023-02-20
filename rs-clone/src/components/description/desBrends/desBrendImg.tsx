@@ -1,6 +1,7 @@
 import { IData } from '../../../types/interfaces';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getTopScroll } from '../../../utils/scroll';
 
 export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     const { employer } = props;
@@ -32,7 +33,7 @@ export const BrendImg: React.FC<Pick<IData, 'employer'>> = (props) => {
     }, []);
 
     return (
-        <Link className="des-brend__link" to={`/employers/${employer?.id}`}>
+        <Link className="des-brend__link" to={`/employers/${employer?.id}`} onClick={getTopScroll}>
             <img className="des-brend__img" src={state.image} alt={employer?.name} data-valid={state.valid} />
         </Link>
     );
