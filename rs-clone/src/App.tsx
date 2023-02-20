@@ -7,6 +7,7 @@ import { DescriptionPages, loader } from './pages/description';
 import { Layout } from './components/Layout';
 import { NotFound } from './pages/notFound';
 import { EmpoloyersPages, loaderEmployers } from './pages/employers';
+import { ValidCompanyPage } from './pages/validCompany';
 
 export const App = () => {
     const [url, toggleUrl] = useState(defaultUrl.url);
@@ -21,6 +22,7 @@ export const App = () => {
                 <Route path="vacancies" element={<VacanciesPages />} />
                 <Route path="vacancies/:id" element={<DescriptionPages />} loader={loader} />
                 <Route path="employers/:id" element={<EmpoloyersPages />} loader={loaderEmployers} />
+                <Route path="companyvalid" element={<ValidCompanyPage />} />
             </Route>
         )
     );

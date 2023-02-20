@@ -9,7 +9,7 @@ export const DescriptionContact = (props: { data: IData }) => {
     const getValidEmail = (param: string) => {
         if (param) {
             return (
-                <a className="des-contanct__email" href={param} target="_blank" rel="noreferrer">
+                <a className="des-contanct__email" href={`mailto:${param}`} target="_blank" rel="noreferrer">
                     {param}
                 </a>
             );

@@ -14,7 +14,7 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
     const getValidEmail = (param: string) => {
         if (param) {
             return (
-                <a className="top-info__email" href={param} target="_blank" rel="noreferrer">
+                <a className="top-info__email" href={`mailto:${param}`} target="_blank" rel="noreferrer">
                     {param}
                 </a>
             );
