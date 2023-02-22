@@ -1,6 +1,6 @@
 import './Footer.scss'
 
-import darkLogo from './img/dark-logo.png'
+import darkLogo from './img/rss.jpg'
 import gitHub from './img/github.svg'
 
 export function Footer(){
@@ -11,10 +11,10 @@ export function Footer(){
             <div className="footer-wrapper container">
                 <div className="main-block">
                     <div className="main-block-tittle">
-                        <div className="footer-name-logo">hh.ru</div>
-                        <div className="footer-logo"><img src={darkLogo} alt="dark logo" /></div>
+                        <div className="footer-name-logo">RSJobs</div>
+                        <div className="footer-logo"><img className='footerlogo' src={darkLogo} alt="dark logo" /></div>
                     </div>
-                    <div className="text">
+                    {/* <div className="text">
                         <div className="text-colum1 footercolum">
                             <p>О компании</p>
                             <p>Наши вакансии</p>
@@ -45,7 +45,7 @@ export function Footer(){
                             <p>Работа по профессиям</p>
                             <p>Работа рядом с метро</p>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="links">
                         <div className="rs"><a href="https://rs.school/js/" target="_blank" rel="noreferrer"><img src="https://rs.school/images/rs_school_js.svg" alt="rsschool" /></a></div>
                         <div className="github"><a href="https://github.com/Mornival" target="_blank" rel="noreferrer"><img src={gitHub} alt="github" /></a></div>
