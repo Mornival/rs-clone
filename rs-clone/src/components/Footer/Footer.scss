@@ -16,6 +16,9 @@
 .footer-logo {
     width: 6rem;
 }
+.footerlogo {
+    border-radius: 3px;
+}
 .footer-name-logo {
     font-size: 3rem;
     line-height: 1.4;
@@ -34,6 +37,7 @@
     justify-content: start;
     align-items: center;
     gap: 3rem;
+    margin-top: 2rem;
 }
 .rs {
     width: 10rem;

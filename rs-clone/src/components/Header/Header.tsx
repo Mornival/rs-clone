@@ -1,5 +1,5 @@
 import './Header.scss';
-import logo from './img/logo.png';
+import logo from './img/rs.jpg'
 import loupeimg from './img/loupe.png';
 import filter from './img/filter.png';
 import { Link } from 'react-router-dom';
@@ -64,7 +64,7 @@ export function Header() {
                     <div className="block-logo">
                         <Link className="logo-link" to={'/'}>
                             <img className="logo" src={logo} alt="logo" />
-                            <div className="logo-text">hh.ru</div>
+                            <div className="logo-text">RSJobs</div>
                         </Link>
                     </div>
                     <div className="help">

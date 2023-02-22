@@ -103,3 +103,19 @@
         }
     }
 }
+
+@media (max-width: 700px) {
+    .employer__box {
+        display: flex;
+        flex-direction: column;
+    }
+    body {
+        font-size: 1.2rem;
+    }
+    .descriptions__btn-prev {
+        margin-bottom: 0.5rem;
+        width: 3rem;
+        height: 3rem;
+        margin-left: 1rem;
+    }
+}

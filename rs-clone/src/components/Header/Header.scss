@@ -61,6 +61,7 @@
     font-weight: 200;
 }
 .add-resume {
+    display: none;
     margin-left: 20px;
 }
 
@@ -182,4 +183,46 @@ a.login:hover {
     top: 75px;
     transition: top .5s linear;
     display: none;
+}
+
+@media (max-width: 740px) {
+    .help {
+        font-size: 15px;
+        margin-left: 20px;
+    }
+    .loupe-logo {
+        width: 15px;
+    }
+    .btn-login {
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+    .search-inpute {
+        width: 280px;
+    }
+    .tringle {
+        display: none;
+    }
+}
+@media (max-width: 720px) {
+    .block-search {
+        padding: 10px;
+        height: 100px;
+    }
+    .search-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .filter-search {
+        margin-left: 0;
+    }
+    .btn-search {
+        margin-left: 0;
+    }
+}
+@media (max-width: 400px) {
+        .loupe {
+            display: none;
+        }
 }
