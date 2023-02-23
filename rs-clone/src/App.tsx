@@ -8,6 +8,8 @@ import { Layout } from './components/Layout';
 import { NotFound } from './pages/notFound';
 import { EmpoloyersPages, loaderEmployers } from './pages/employers';
 import { ValidCompanyPage } from './pages/validCompany';
+import { RegisterPage } from './pages/registerPage';
+import { LoginPage } from './pages/loginPage';
 
 export const App = () => {
     const [url, toggleUrl] = useState(defaultUrl.url);
@@ -20,6 +22,8 @@ export const App = () => {
             <Route path="/" element={<Layout />} errorElement={<NotFound />}>
                 <Route index element={<Vacancies />} />
                 <Route path="vacancies" element={<VacanciesPages />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
                 <Route path="vacancies/:id" element={<DescriptionPages />} loader={loader} />
                 <Route path="employers/:id" element={<EmpoloyersPages />} loader={loaderEmployers} />
                 <Route path="companyvalid" element={<ValidCompanyPage />} />
