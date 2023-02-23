@@ -1,15 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { stopSubmitFormHandler } from 'utils/stopSubmitForm';
+import { valid_form } from 'types/enum';
 import './form.scss';
 
-export const Form = (props: { title: string; handleClick: any; valid: boolean }) => {
+export const Form = (props: {
+    title: string;
+    handleClick: (email: string, password: string) => void;
+    valid: string;
+}) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const { title, handleClick, valid } = props;
 
+    let text = '';
+
+    if (valid === valid_form.no_accaunt) {
+        text = 'Неверный email или пароль';
+    } else if (valid === valid_form.account_is_used) {
+        text = 'Такой аккаунт уже есть';
+    }
+
+    useEffect(() => {
+        setEmail('');
+        setPass('');
+    }, [valid]);
+
     return (
         <>
-            {valid ? '' : <span className="login-page__valid">Неверный аккаунт</span>}
+            <span className="login-page__valid">{text}</span>
 
             <form className="form" onSubmit={stopSubmitFormHandler}>
                 <label className="form__box form__box--email" htmlFor="email">
@@ -18,7 +36,7 @@ export const Form = (props: { title: string; handleClick: any; valid: boolean })
                         className="form__input form__email"
                         id="email"
                         type="email"
-                        value={valid ? email : ''}
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="email"
                         autoComplete="none"
@@ -32,7 +50,7 @@ export const Form = (props: { title: string; handleClick: any; valid: boolean })
                         className="form__input form__password"
                         id="password"
                         type="password"
-                        value={valid ? pass : ''}
+                        value={pass}
                         onChange={(e) => setPass(e.target.value)}
                         placeholder="password"
                         minLength={6}

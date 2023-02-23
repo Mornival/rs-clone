@@ -4,9 +4,10 @@ import { setUser } from 'store/slice/useSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { valid_form } from 'types/enum';
 
 export const Login = () => {
-    const [state, setState] = useState(true);
+    const [state, setState] = useState('');
     const dispatch = useDispatch();
     const history = useNavigate();
 
@@ -27,7 +28,7 @@ export const Login = () => {
             history('/vacancies');
         } catch (error) {
             console.log('error', error);
-            setState(false);
+            setState(valid_form.no_accaunt);
         }
     };
 
