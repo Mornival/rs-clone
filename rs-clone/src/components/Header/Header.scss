@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600&display=swap");
 
 .header {
     background-color: var(--black);
@@ -10,31 +10,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-   
 }
+
 .left-block {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .rigth-block {
     display: flex;
     align-items: center;
     justify-content: center;
+    column-gap: 2rem;
 }
+
 .logo {
     width: 25px;
     height: 25px;
     border-radius: 3px;
 }
+
 .logo-link {
     display: flex;
     align-items: center;
 }
+
 .logo-text {
     color: #fff;
     margin-left: 7px;
-    font-family: 'Roboto Slab', serif;
+    font-family: "Roboto Slab", serif;
     font-weight: 600;
     font-size: 20px;
 }
@@ -54,7 +59,7 @@
 }
 .btn-res {
     border-radius: 20px;
-    border: 1px solid rgba(163,218,165,.8);
+    border: 1px solid rgba(163, 218, 165, 0.8);
     padding: 5px 12px;
     font-size: 15px;
     font-weight: 200;
@@ -75,22 +80,21 @@
     margin-left: 20px;
 }
 a.add-resume {
-    color: rgba(163,218,165,.7)
+    color: rgba(163, 218, 165, 0.7);
 }
 a.add-resume:hover {
-    border-color: rgba(163,218,165,.5);
-    color: rgba(163,218,165)
+    border-color: rgba(163, 218, 165, 0.5);
+    color: rgba(163, 218, 165);
 }
 a.login {
-    color: rgb(255, 255, 255,.8)
+    color: rgb(255, 255, 255, 0.8);
 }
 a.login:hover {
-    border-color: rgba(163,218,165,.5);
-    color: rgb(255, 255, 255)
+    border-color: rgba(163, 218, 165, 0.5);
+    color: rgb(255, 255, 255);
 }
 .loupe {
     position: relative;
-    
 }
 .loupe-logo {
     cursor: pointer;
@@ -110,7 +114,6 @@ a.login:hover {
 .tringle-white {
     border-color: white;
 }
-
 
 //block search
 
@@ -153,10 +156,10 @@ a.login:hover {
     background-color: #1785e5;
     margin-left: 20px;
     z-index: 3;
-    color:white;
+    color: white;
 }
-.btn-clear{
-    width:100px;
+.btn-clear {
+    width: 100px;
 }
 .btn-search:hover {
     background-color: #228be6;
@@ -180,7 +183,7 @@ a.login:hover {
 }
 .close-tringle {
     top: 75px;
-    transition: top .5s linear;
+    transition: top 0.5s linear;
     display: none;
 }
 
@@ -221,7 +224,7 @@ a.login:hover {
     }
 }
 @media (max-width: 400px) {
-        .loupe {
-            display: none;
-        }
+    .loupe {
+        display: none;
+    }
 }
