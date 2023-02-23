@@ -1,7 +1,9 @@
 import { IData } from '../../types/interfaces';
+import { useAuth } from 'hooks/use-auth';
 
 export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props) => {
     const contactsEmployer = props?.contacts || '';
+    const { isAuth } = useAuth();
 
     function addClassInfoNandler() {
         const box = arguments[0].target.parentElement as HTMLElement;
@@ -21,6 +23,8 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
         }
     };
 
+    const getFavoritHandler = () => {};
+
     return (
         <ul className="descriptions__top-buttons">
             <li className="descriptions__top-item">
@@ -31,27 +35,34 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
 
             <li className="descriptions__top-item descriptions__top-item--employer">
                 <div className="descriptions__top-item_info top-info">
-                    <h3 className="top-info__title">{contactsEmployer ? contactsEmployer.name : 'Данные не указаны'}</h3>
-
-                    <address className="top-info__address">
-                        <ul className="top-info__phone-box">
-                            {arrPhone.length !== 0
-                                ? arrPhone.map(({ city, number, country, formatted }) => (
-                                      <li className="top-info__phone" key={formatted}>
-                                          <a
-                                              className="top-info__phone-link"
-                                              href={`tel:${formatted}`}
-                                              target="_blank"
-                                              rel="noreferrer"
-                                          >
-                                              {`${country}-${city}-${number}`}
-                                          </a>
-                                      </li>
-                                  ))
-                                : ''}
-                        </ul>
-                        {contactsEmployer ? getValidEmail(contactsEmployer.email) : ''}
-                    </address>
+                    {isAuth ? (
+                        <>
+                            <h3 className="top-info__title">
+                                {contactsEmployer ? contactsEmployer.name : 'Данные не указаны'}
+                            </h3>
+                            <address className="top-info__address">
+                                <ul className="top-info__phone-box">
+                                    {arrPhone.length !== 0
+                                        ? arrPhone.map(({ city, number, country, formatted }) => (
+                                              <li className="top-info__phone" key={formatted}>
+                                                  <a
+                                                      className="top-info__phone-link"
+                                                      href={`tel:${formatted}`}
+                                                      target="_blank"
+                                                      rel="noreferrer"
+                                                  >
+                                                      {`${country}-${city}-${number}`}
+                                                  </a>
+                                              </li>
+                                          ))
+                                        : ''}
+                                </ul>
+                                {contactsEmployer ? getValidEmail(contactsEmployer.email) : ''}
+                            </address>
+                        </>
+                    ) : (
+                        'пройдите авторизацию'
+                    )}
                 </div>
 
                 <button className="descriptions__top-btn" type="button" onClick={addClassInfoNandler}>
@@ -60,7 +71,11 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
             </li>
 
             <li className="descriptions__top-item">
-                <button className="descriptions__top-btn descriptions__top-btn--favorite" type="button">
+                <button
+                    className="descriptions__top-btn descriptions__top-btn--favorite"
+                    type="button"
+                    onClick={getFavoritHandler}
+                >
                     <span className="sr-only">Кнопка фаворита</span>
                 </button>
             </li>
