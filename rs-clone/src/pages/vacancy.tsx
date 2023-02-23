@@ -93,7 +93,7 @@ export const VacanciesPages = () => {
             requestFilters = true;
             getFilters();
         }
-        if (obj  && setUrl) {
+        if (obj && setUrl) {
             setUrl();
             requestVacancies = false;
             setRender(true);
@@ -114,7 +114,7 @@ export const VacanciesPages = () => {
     return (
         <>
             {renderFilter && (
-                <main className="vacancies-filter-page">
+                <section className="vacancies-filter-page">
                     {renderFilter && (
                         <div className="vacancies-filter-block">
                             {createFilters()}
@@ -133,7 +133,7 @@ export const VacanciesPages = () => {
                             <h2>Данные Загружаются</h2>
                         </div>
                     )}
-                </main>
+                </section>
             )}
             {!renderFilter && (
                 <div className="vacancies-loading-block">
