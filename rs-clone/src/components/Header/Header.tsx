@@ -1,5 +1,5 @@
 import './Header.scss';
-import logo from './img/rs.jpg'
+import logo from './img/rs.jpg';
 import loupeimg from './img/loupe.png';
 import filter from './img/filter.png';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,7 @@ export function Header() {
     const tringle = document.querySelector('.tringle');
     const searchBtn = document.querySelector('.search-btn');
     const btnsearch = document.querySelector('.btn-search');
+    const btnClear = document.querySelector('.btn-clear');
     const filtersearch = document.querySelector('.filter-search');
     const [text, setText] = useState<string>('');
     const location = useLocation();
@@ -46,6 +47,7 @@ export function Header() {
             setUrl();
         }
     };
+
     const clickСlear = () => {
         const queryString: string = window.location.search.substring(1);
         const queryObj: qs.ParsedQs = qs.parse(queryString);
@@ -70,6 +72,7 @@ export function Header() {
         tringle?.classList.toggle('tringle-white');
         blockSearch?.classList.toggle('block-search-hiden');
         searchBtn?.classList.toggle('hide');
+        btnClear?.classList.toggle('hide');
         btnsearch?.classList.toggle('hide');
         filtersearch?.classList.toggle('hide');
     }
@@ -94,10 +97,6 @@ export function Header() {
                         <div className="tringle "></div>
                     </div>
 
-                    <a href="/" className="add-resume">
-                        <div className="btn-res">Создать резюме</div>
-                    </a>
-
                     {isAuth ? (
                         <button
                             className="sign-out"
@@ -115,6 +114,7 @@ export function Header() {
                     )}
                 </div>
             </div>
+
             <div className="block-search">
                 <div className="search-wrapper">
                     <div className="search search-btn">

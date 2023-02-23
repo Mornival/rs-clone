@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Login } from 'components/auth/login';
-
 import './login.scss';
 
 export const LoginPage = () => {
