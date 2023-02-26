@@ -13,6 +13,8 @@ let requestFilters: boolean = false;
 let requestVacancies: boolean = false;
 export const VacanciesPages = () => {
     const { url, setUrl } = useContext(urlContext);
+    const [clickStatusFilters, setClickStatusFilters] = useState<boolean>(false);
+    const [statusFilters, setStatusFilters] = useState<boolean>(false);
     const [obj, setObj] = useState<IResponse>();
     const [filterObj, setFilterObj] = useState<IResponse>();
     const [renderFilter, setRenderFilter] = useState<boolean>(false);
@@ -111,33 +113,57 @@ export const VacanciesPages = () => {
             setObj(undefined);
         }
     }, [url]);
+    const clickFiltersStatus = () =>{
+        setClickStatusFilters(true);
+        const filtersBlock = document.querySelector('.vacancies-filter-block');
+        const vacancyBlock = document.querySelector('.vacancies-list-block');
+        if(filtersBlock?.classList.length === 1){
+            filtersBlock?.classList.add('vacancies-filter-block-active');
+            vacancyBlock?.classList.add('vacancies-list-block-non-active');
+        } else {
+            filtersBlock?.classList.remove('vacancies-filter-block-active');
+            vacancyBlock?.classList.remove('vacancies-list-block-non-active');
+            vacancyBlock?.classList.remove('vacancies-list-block-off');
+        }
+        setTimeout(changeFiltersStatus,510);
+    }
+    const changeFiltersStatus = () =>{
+        const vacancyBlock = document.querySelector('.vacancies-list-block');
+        if(vacancyBlock?.classList.length === 2){
+            vacancyBlock.classList.add('vacancies-list-block-off');
+        }
+        setStatusFilters(!statusFilters);
+        setClickStatusFilters(false);
+    }
     return (
         <>
             {renderFilter && (
                 <section className="vacancies-filter-page">
                     {renderFilter && (
                         <div className="vacancies-filter-block">
+                            {statusFilters && <button className="vacancy-toggle-filters-vacancies" onClick={clickFiltersStatus} disabled={clickStatusFilters}>Вакансии</button>}
                             {createFilters()}
                             {<VacanciesResetFilters key="vacancies-reset-filters" />}
                         </div>
                     )}
-                    {render && (
+                    {(!statusFilters || clickStatusFilters) && render && (
                         <div className="vacancies-list-block">
                             {<h2 className="vacancies-list-block-h2">{`Найдено: ${obj?.found} вакансий`}</h2>}
+                            {!statusFilters && <button className="vacancy-toggle-filters-vacancies" onClick={clickFiltersStatus} disabled={clickStatusFilters}>Фильтры</button>}
                             {createVacancies()}
                             {<div className="vacancies-filter-pagination">{getPagination()}</div>}
                         </div>
                     )}
-                    {renderFilter && !render && (
+                    {!statusFilters && renderFilter && !render && (
                         <div className="vacancies-loading-data">
-                            <h2>Данные Загружаются</h2>
+                            <h2>Данные Загружаются...</h2>
                         </div>
                     )}
                 </section>
             )}
             {!renderFilter && (
                 <div className="vacancies-loading-block">
-                    <h2 className="vacancies-loading-h2">Loading...</h2>
+                    <h2 className="vacancies-loading-h2">Данные Загружаются...</h2>
                 </div>
             )}
         </>

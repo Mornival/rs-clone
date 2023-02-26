@@ -1,6 +1,6 @@
 export const cleaningQs =(str: string) => {
-    let newStr ='';
-    let valid = true;
+    let newStr: string ='';
+    let valid:boolean = true;
     newStr = str.split('').map((v) => {
         if(v === '['){
             valid = false;

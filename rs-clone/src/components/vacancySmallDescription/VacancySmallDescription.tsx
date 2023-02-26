@@ -47,9 +47,9 @@ export const VacancySmallDescription = (data: IProps) => {
                     </h3>
                 )}
                 {vacancy.employer?.logo_urls && (
-                    <img className="vacancies-small-img" src={vacancy.employer?.logo_urls.original} alt="logo" />
+                    <Link to={`../employers/${vacancy.employer?.id}`}><img className="vacancies-small-img" src={vacancy.employer?.logo_urls.original} alt="logo" /></Link>
                 )}
-                {vacancy.employer?.name && <p>{vacancy.employer?.name}</p>}
+                {vacancy.employer?.name && <p>{vacancy.employer.id}</p>}
                 {vacancy.area && <p className="vacancy-small-area">{vacancy.area.name}</p>}
                 {vacancy.snippet.responsibility && (
                     <p dangerouslySetInnerHTML={{ __html: vacancy.snippet.responsibility }}></p>

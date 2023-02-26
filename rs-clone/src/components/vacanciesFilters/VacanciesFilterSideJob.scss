@@ -92,6 +92,7 @@
 .vacancy-filter-own-salary{
     display: flex;
     flex-direction: column;
+    max-width:400px;
     input {
         margin-right:10px;
         text-align: center;
@@ -100,6 +101,7 @@
     #own-salary-input{
         margin:5px auto;
         width: calc(100% - 120px);
+        max-width:300px;
     }
     .own-salary-button{
         margin:5px auto;

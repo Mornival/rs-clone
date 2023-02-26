@@ -184,6 +184,7 @@ export interface IItem {
     created_at: string,
     published_at: string,
     employer: {
+        id: string,
         name: string,
         trusted: boolean,
         logo_urls: {

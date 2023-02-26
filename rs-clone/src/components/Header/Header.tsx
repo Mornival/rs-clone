@@ -30,9 +30,7 @@ export function Header() {
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         const input: HTMLInputElement | null = document.querySelector('.search-inpute') as HTMLInputElement;
         if (location.pathname === '/vacancies' && setUrl && input) {
-            console.log(input.value);
             queryObj['text'] = input.value;
-            console.log(qs.stringify(queryObj));
             window.history.replaceState(
                 null,
                 '',

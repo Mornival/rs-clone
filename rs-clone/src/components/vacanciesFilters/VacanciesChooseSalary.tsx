@@ -99,7 +99,6 @@ export const VacanciesChooseSalary = (props: IProps) => {
     }
     const clickFind = () => {
         const inputArea: HTMLInputElement | null = document.getElementById('own-salary-input') as HTMLInputElement;
-        console.log(inputArea)
         if (!url && inputArea.value) {
             const queryString: string = window.location.search.substring(1);
             const queryObj: qs.ParsedQs = qs.parse(queryString);
@@ -150,20 +149,20 @@ export const VacanciesChooseSalary = (props: IProps) => {
             <div className="vacancy-filter-own-salary vacancy-filter-line">
                 <div>
                     <label>
-                        <input className="radio" id={"dont-worry-about-salary"} onClick={e => clickClearSalary(e)} type="radio" name={name} defaultChecked={checkBaseInput} />
+                        <input className="radio" id={"dont-worry-about-salary"} onClick={e => clickClearSalary(e)} type="radio" name={name} defaultChecked={checkBaseInput} disabled={url}/>
                         <span className="fake-radio"></span>
                         <span>Не имеет значения</span>
                     </label>
                 </div>
                 <div>
                     <label>
-                        <input className="radio" id={"own-salary"} type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio} />
+                        <input className="radio" id={"own-salary"} type="radio" name={name} onClick={clickRadio} defaultChecked={checkStatusRadio} disabled={url}/>
                         <span className="fake-radio"></span>
                         <span>Своя зарплата</span>
                     </label>
                 </div>
                 <div className="vacancies-filter-salary-input">
-                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 20000 руб`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum} />
+                    <input id={`own-salary-input`} type="text" className="vacancies-own-salary" placeholder={`от 20000 руб`} onClick={clickSalary} onInput={e => inputSalary(e)} defaultValue={defaultSum} disabled={url}/>
                     <button className="own-salary-button" onClick={clickFind}>Найти</button>
                 </div>
             </div>
