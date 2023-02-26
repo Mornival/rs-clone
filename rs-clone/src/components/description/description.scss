@@ -56,17 +56,18 @@
         display: flex;
         justify-content: space-between;
         column-gap: 2rem;
+
+        @media (max-width: 576px) {
+            flex-direction: column;
+            row-gap: 2rem;
+        }
     }
 
     &__top-item {
         border: 1px solid var(--green-100);
-        flex: 1 1 32rem;
+        flex: 1 1 auto;
         text-align: center;
         border-radius: 5px;
-
-        &:last-child {
-            flex: 0 1 4.8rem;
-        }
     }
 
     &__top-btn,
@@ -121,21 +122,6 @@
         transition: opacity 0.6s ease-in-out;
         opacity: 0;
         padding: 15px 15px 15px 20px;
-    }
-
-    &__top-btn--favorite {
-        position: relative;
-        height: 100%;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: calc(50% - 1.2rem);
-            left: calc(50% - 1.2rem);
-            width: 2.4rem;
-            height: 2.4rem;
-            background: url("./img/icon/icon-favorit.jpg") no-repeat center/cover;
-        }
     }
 
     &__content {

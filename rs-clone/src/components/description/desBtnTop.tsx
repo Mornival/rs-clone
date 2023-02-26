@@ -1,9 +1,11 @@
 import { IData } from '../../types/interfaces';
 import { useAuth } from 'hooks/use-auth';
+import { useNavigate } from 'react-router-dom';
 
 export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props) => {
     const contactsEmployer = props?.contacts || '';
     const { isAuth } = useAuth();
+    const history = useNavigate();
 
     function addClassInfoNandler() {
         const box = arguments[0].target.parentElement as HTMLElement;
@@ -23,12 +25,14 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
         }
     };
 
-    const getFavoritHandler = () => {};
+    function getLinkHandler() {
+        return isAuth ? history('/cabinet') : history('/login');
+    }
 
     return (
         <ul className="descriptions__top-buttons">
             <li className="descriptions__top-item">
-                <button className="descriptions__top-link" type="button">
+                <button className="descriptions__top-link" type="button" onClick={getLinkHandler}>
                     Откликнуться
                 </button>
             </li>
@@ -67,16 +71,6 @@ export const BtnListTop: React.FC<Pick<IData, 'contacts'> | undefined> = (props)
 
                 <button className="descriptions__top-btn" type="button" onClick={addClassInfoNandler}>
                     Показать контакты
-                </button>
-            </li>
-
-            <li className="descriptions__top-item">
-                <button
-                    className="descriptions__top-btn descriptions__top-btn--favorite"
-                    type="button"
-                    onClick={getFavoritHandler}
-                >
-                    <span className="sr-only">Кнопка фаворита</span>
                 </button>
             </li>
         </ul>

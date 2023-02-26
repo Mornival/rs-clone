@@ -31,7 +31,6 @@ const GetData = () => {
 
 export const DescriptionPages = () => {
     const res = useLoaderData() as IData;
-
     window.onscroll = function () {
         const btnScroll = document.querySelector('.descriptions__btn-scroll') as HTMLButtonElement;
         scrollFunction(btnScroll);
