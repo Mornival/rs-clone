@@ -17,12 +17,6 @@ import { removeUser } from 'store/slice/useSlice';
 export function Header() {
     const { isAuth, email } = useAuth();
     const { setUrl } = useContext(urlContext);
-    const blockSearch = document.querySelector('.block-search');
-    const tringle = document.querySelector('.tringle');
-    const searchBtn = document.querySelector('.search-btn');
-    const btnsearch = document.querySelector('.btn-search');
-    const btnClear = document.querySelector('.btn-clear');
-    const filtersearch = document.querySelector('.filter-search');
     const [text, setText] = useState<string>('');
     const location = useLocation();
     const dispatch = useDispatch();
@@ -66,17 +60,6 @@ export function Header() {
         }
     };
 
-    function search() {
-        blockSearch?.classList.toggle('close');
-        tringle?.classList.toggle('close-tringle');
-        tringle?.classList.toggle('tringle-white');
-        blockSearch?.classList.toggle('block-search-hiden');
-        searchBtn?.classList.toggle('hide');
-        btnClear?.classList.toggle('hide');
-        btnsearch?.classList.toggle('hide');
-        filtersearch?.classList.toggle('hide');
-    }
-
     return (
         <header className="header">
             <div className="header-wrapper container">
@@ -87,13 +70,10 @@ export function Header() {
                             <div className="logo-text">RSJobs</div>
                         </Link>
                     </div>
-                    <div className="help">
-                        <p>Помощь</p>
-                    </div>
                 </div>
                 <div className="rigth-block">
                     <div className="loupe">
-                        <img className="loupe-logo" onClick={search} src={loupeimg} alt="loupe logo" />
+                        <img className="loupe-logo" src={loupeimg} alt="loupe logo" />
                         <div className="tringle "></div>
                     </div>
 

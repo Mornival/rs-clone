@@ -10,6 +10,7 @@ import { EmpoloyersPages, loaderEmployers } from './pages/employers';
 import { ValidCompanyPage } from './pages/validCompany';
 import { RegisterPage } from './pages/registerPage';
 import { LoginPage } from './pages/loginPage';
+import { PersonalCabinet } from 'pages/personalCabinet';
 
 export const App = () => {
     const [url, toggleUrl] = useState(defaultUrl.url);
@@ -27,6 +28,7 @@ export const App = () => {
                 <Route path="vacancies/:id" element={<DescriptionPages />} loader={loader} />
                 <Route path="employers/:id" element={<EmpoloyersPages />} loader={loaderEmployers} />
                 <Route path="companyvalid" element={<ValidCompanyPage />} />
+                <Route path="cabinet" element={<PersonalCabinet />} />
             </Route>
         )
     );

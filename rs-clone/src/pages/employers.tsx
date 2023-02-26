@@ -8,7 +8,7 @@ import { IEmployer } from '../types/interfaces';
 
 export const EmpoloyersPages = () => {
     const response = useLoaderData() as IEmployer;
-
+    
     return (
         <section className="employer container">
             <BtnPrevDes />
