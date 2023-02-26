@@ -1,6 +1,6 @@
 # RSjobs
 # Команда:
-- [Егений](https://github.com/Mornival)
+- [Евгений](https://github.com/Mornival)
 - [Сергей](https://github.com/SergeiKudlai)
 - [Андрей](https://github.com/thestrelchik)
 
