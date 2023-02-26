@@ -8,8 +8,8 @@
     .vacancies-small-img{
         position: absolute;
         top:40px;
-        left:calc(100% - 120px);
-        width:100px;
+        left:calc(100% - 220px);
+        width:200px;
     }
     h2{
         padding-top:10px;
@@ -21,7 +21,7 @@
     }
     p{
         font-size:1.5rem;
-        width:calc(100% - 160px);
+        width:calc(100% - 260px);
     }
     .vacancy-small-area{
         margin-top:0px;
@@ -32,5 +32,18 @@
         border-radius:10px;
         padding:10px;
         margin-bottom:20px;
+    }
+    @media(max-width:1027px){
+        .vacancies-small-img{
+            position:static;
+            width:calc(100% - 200px);
+            margin: 10px 100px;
+            top:0;
+            left:0;
+        }
+        p{
+            font-size:1.5rem;
+            width:calc(100% - 20px);
+        }
     }
 }
