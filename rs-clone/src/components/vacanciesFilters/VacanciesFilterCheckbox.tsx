@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import urlContext from "../../context/historyURL";
 import { cleaningQs } from "./cleaningQS";
 import { useEffect } from 'react';
-//&& (queryObj[`${idItem}`] as string[]).includes((queryParam[`${idItem}`] as string))
+
 interface IProps {
     props: IItems,
     name: string,
@@ -15,7 +15,6 @@ interface IProps {
 
 export const VacanciesFilterCheckbox = (props: IProps) => {
     let item: IItems = props.props;
-    let name: string = props.name;
     let idItem: string = props.id;
     const {url, setUrl} = useContext(urlContext);
     let checkStatus: boolean = false;
@@ -51,7 +50,6 @@ export const VacanciesFilterCheckbox = (props: IProps) => {
                 queryObj = qs.parse(queryString);
         } else if(queryObj[`${idItem}`] && !e.currentTarget.checked && !Array.isArray(queryObj[`${idItem}`])){
             if(queryObj[`${idItem}`] === queryParam[`${idItem}`]){
-                console.log("1");
                 delete queryObj[`${idItem}`];
             }
         } else if(queryObj[`${idItem}`] && Array.isArray(queryObj[`${idItem}`]) && queryParam[`${idItem}`]

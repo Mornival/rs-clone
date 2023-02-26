@@ -27,7 +27,6 @@ export const VacanciesPagination = (props: IProps) => {
         const queryObj: qs.ParsedQs = qs.parse(queryString);
         if(queryObj['page'] !== (page - 1).toString()){
             queryObj['page'] = (page - 1).toString();
-            console.log(queryObj);
             window.history.replaceState(null,'',`${response_name.vacancies}?${cleaningQs(decodeURI(qs.stringify(queryObj)))}`);
             if(setUrl){
                 setUrl();
