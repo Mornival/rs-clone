@@ -1,0 +1,91 @@
+.des-brend {
+    display: flex;
+    flex-direction: column;
+
+    &__link {
+        align-self: flex-start;
+        border: 1px solid transparent;
+        transition: transform 0.5s ease-in-out, border 0.5s ease-in-out;
+
+        &:hover {
+            transform: perspective(20rem) rotateY(-15deg) translateZ(4px);
+            border: 1px solid var(--gray);
+        }
+    }
+
+    &__img {
+        &[data-valid="true"] {
+            display: none;
+        }
+    }
+
+    &__title-box {
+        display: flex;
+        align-items: center;
+        column-gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    &__title {
+        position: relative;
+        font-size: 2.4rem;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            transition: width 0.5s ease-in-out;
+        }
+
+        &::before {
+            right: 50%;
+            background-color: var(--green-200);
+        }
+
+        &::after {
+            left: 50%;
+            background-color: var(--blue-300);
+        }
+
+        &:hover {
+            &::before,
+            &::after {
+                width: 50%;
+            }
+        }
+    }
+
+    &__valid {
+        display: block;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+    }
+}
+
+.des-skills {
+    &__title {
+        margin-bottom: 2rem;
+        font-size: 2.4rem;
+        font-weight: 700;
+    }
+
+    &__list {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    &__item {
+        border-radius: 4px;
+        background-color: #edeff0;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,120 @@
+.vacancies-filter-page {
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    margin-left: calc(50% - 600px);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    .vacancies-list-block {
+        min-height: 100px;
+        width: calc(100% - 300px);
+        .vacancies-list-block-h2 {
+            margin: 30px;
+        }
+        transition: linear .5s;
+    }
+    .vacancies-filter-block {
+        min-width: 300px;
+        max-width: 300px;
+        margin-left: 10px;
+        h2 {
+            color: grey;
+            font-size: 1.8rem;
+            margin-left: 20px;
+        }
+        transition: linear .5s;
+    }
+    .vacancy-toggle-filters-vacancies{
+        display: none;
+    }
+    @media(max-width:1227px){
+        width:100%;
+        margin-left: 10px;
+        .vacancies-list-block {
+            min-height: 100px;
+            width: calc(100% - 300px);
+            .vacancies-list-block-h2 {
+                margin: 30px;
+            }
+        }
+    }
+    @media(max-width:827px){
+        width:100%;
+        margin-left: 10px;
+        .vacancies-filter-block{
+            margin-left:-310px;
+        }
+        .vacancies-list-block{
+            min-width:calc(100% - 20px);
+            max-width:calc(100% - 20px);
+        }
+        .vacancies-list-block-non-active{
+            min-width:calc(100% - 20px);
+            max-width:calc(100% - 20px);
+            right:100%;
+        }
+        .vacancies-list-block-off{
+            display: none;
+        }
+        .vacancies-filter-block-off{
+            display: none;
+        }
+        .vacancies-filter-block-active{
+            margin-left:10px;
+            min-width:calc(100% - 20px);
+            max-width:calc(100% - 20px);
+        }
+        .vacancy-toggle-filters-vacancies{
+            display: inline-block;
+            margin-left: 10px;
+            width:calc(100% - 20px);
+            margin-bottom:10px;
+            background-color:#1785e5;
+            color:white;
+            border-radius:10px;
+            padding:20px;
+            &:hover{
+                opacity:0.6;
+            }
+            &:active{
+                opacity:0.3;
+            }
+            &:disabled{
+                opacity:0.3;
+            }
+        }
+    }
+}
+.vacancies-loading-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #edeff0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .vacancies-loading-h2 {
+        font-weight: 700;
+    }
+}
+.vacancies-filter-pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.vacancies-loading-data {
+    display: flex;
+    justify-content: center;
+    background: #edeff0;
+    width: 100%;
+    h2 {
+        padding-top: 40px;
+        font-size: 3rem;
+        color: black;
+        text-align: center;
+    }
+}

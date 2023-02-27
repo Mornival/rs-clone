@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600&display=swap");
+
+.header {
+    background-color: var(--black);
+}
+.header-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rigth-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+}
+
+.logo {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    color: #fff;
+    margin-left: 7px;
+    font-family: "Roboto Slab", serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.help {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 200;
+    margin-left: 40px;
+    color: var(--white);
+}
+
+.loupe-logo {
+    width: 25px;
+}
+.btn-res {
+    border-radius: 20px;
+    border: 1px solid rgba(163, 218, 165, 0.8);
+    padding: 5px 12px;
+    font-size: 15px;
+    font-weight: 200;
+}
+.add-resume {
+    display: none;
+    margin-left: 20px;
+}
+
+.btn-login {
+    border-radius: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px 12px;
+    font-size: 15px;
+    font-weight: 200;
+}
+.login {
+    margin-left: 20px;
+}
+a.add-resume {
+    color: rgba(163, 218, 165, 0.7);
+}
+a.add-resume:hover {
+    border-color: rgba(163, 218, 165, 0.5);
+    color: rgba(163, 218, 165);
+}
+a.login {
+    color: rgb(255, 255, 255, 0.8);
+}
+a.login:hover {
+    border-color: rgba(163, 218, 165, 0.5);
+    color: rgb(255, 255, 255);
+}
+.loupe {
+    position: relative;
+}
+
+.tringle {
+    position: absolute;
+    left: 3px;
+    top: 41px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #edeff0 transparent;
+    transition: 0.1s linear;
+    z-index: 2;
+}
+.tringle-white {
+    border-color: white;
+}
+
+//block search
+
+.block-search {
+    height: 80px;
+    transition: top 0.3s 0.3s;
+    background-color: #edeff0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    // transition:  .05s linear;
+}
+.block-search-hiden {
+    height: 0px;
+    padding: 0;
+}
+.hide {
+    display: none;
+}
+.search-wrapper {
+    display: flex;
+}
+.search-inpute {
+    height: 40px;
+    width: 400px;
+    color: #303233;
+    border: 1px solid #babdbf;
+    padding: 0 12px;
+    border-radius: 7px;
+    background-color: #fff;
+    transition: 0.1s linear;
+}
+.btn-search {
+    height: 40px;
+    width: 80px;
+    border: 1px solid #babdbf;
+    padding: 0 12px;
+    border-radius: 7px;
+    background-color: #1785e5;
+    margin-left: 20px;
+    z-index: 3;
+    color: white;
+}
+.btn-clear {
+    width: 100px;
+}
+.btn-search:hover {
+    background-color: #228be6;
+}
+.filter-icon {
+    width: 14px;
+    height: 25px;
+}
+.filter-search {
+    height: 40px;
+    width: 40px;
+    color: #303233;
+    border: 1px solid #babdbf;
+    padding: 0 12px;
+    border-radius: 7px;
+    background-color: #fff;
+    margin-left: 20px;
+}
+.close {
+    top: 0;
+}
+.close-tringle {
+    top: 75px;
+    transition: top 0.5s linear;
+    display: none;
+}
+
+@media (max-width: 740px) {
+    .help {
+        font-size: 15px;
+        margin-left: 20px;
+    }
+    .loupe-logo {
+        width: 15px;
+    }
+    .btn-login {
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+    .search-inpute {
+        width: 280px;
+    }
+    .tringle {
+        display: none;
+    }
+}
+@media (max-width: 720px) {
+    .block-search {
+        padding: 10px;
+        height: 100px;
+    }
+    .search-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .filter-search {
+        margin-left: 0;
+    }
+    .btn-search {
+        margin-left: 0;
+    }
+}
+@media (max-width: 400px) {
+    .loupe {
+        display: none;
+    }
+}

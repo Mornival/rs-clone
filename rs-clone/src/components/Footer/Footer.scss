@@ -1,0 +1,60 @@
+.footer {
+    background-color: #303233;
+    color: white;
+}
+.descCompany {
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+.descCopyright {
+    padding-top: 1rem;
+    padding-bottom: 5rem;
+}
+.main-block {
+    padding-top: 2rem;
+}
+.footer-logo {
+    width: 6rem;
+}
+.footerlogo {
+    border-radius: 3px;
+}
+.footer-name-logo {
+    font-size: 3rem;
+    line-height: 1.4;
+}
+.main-block-tittle {
+    display: flex;
+    justify-content: space-between;
+}
+.desk {
+    color: #959799;;
+    margin-top: 2rem;
+    border-top: 1px solid var(--background-color, #494b4d)
+}
+.links {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+.rs {
+    width: 10rem;
+}
+.github {
+    width: 7rem;
+}
+.text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    margin-top: 6rem;
+}
+.footercolum {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 5px;
+    margin-right: 5px;
+}

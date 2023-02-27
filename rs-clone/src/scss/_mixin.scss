@@ -1,0 +1,98 @@
+@import "variables";
+
+@mixin line-clamp($font-size, $line-height, $lines-to-show) {
+    display: block;
+    display: -webkit-box;
+    font-size: $font-size + px;
+    max-height: $font-size * $line-height * $lines-to-show + px;
+    line-height: $line-height;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines-to-show;
+}
+
+@mixin line($lines: 1) {
+    @if $lines <=1 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    } @else {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: $lines;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@mixin media-1 {
+    @media (max-width: $mds1) {
+        @content;
+    }
+}
+
+@mixin media-2 {
+    @media (max-width: $mds2) {
+        @content;
+    }
+}
+
+@mixin media-3 {
+    @media (max-width: $mds3) {
+        @content;
+    }
+}
+
+@mixin media-4 {
+    @media (max-width: $mds4) {
+        @content;
+    }
+}
+
+@mixin mediav-1 {
+    @media (max-width: $mds1) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin mediav-2 {
+    @media (max-width: $mds2) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin mediav-3 {
+    @media (max-width: $mds3) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin mediav-4 {
+    @media (max-width: $mds4) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin font-face($font-family, $url, $weight) {
+    @font-face {
+        font-family: "#{$font-family}";
+        src: url("../assets/fonts/#{$url}.woff2") format("woff2"), url("../assets/fonts/#{$url}.woff") format("woff");
+        font-weight: #{$weight};
+        font-display: swap;
+        font-style: normal;
+    }
+}
+
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+    $padding: unquote(($y / $x) * 100 + "%");
+    @if $pseudo {
+        &::before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}

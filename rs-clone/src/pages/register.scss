@@ -1,0 +1,24 @@
+.register-page {
+    margin-bottom: 3rem;
+    height: 50vh;
+
+    &__inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 2rem;
+    }
+
+    &__link {
+        color: var(--blue-100);
+        text-decoration-color: transparent;
+        transition: text-decoration 0.5s ease-in-out;
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--green);
+        }
+    }
+}

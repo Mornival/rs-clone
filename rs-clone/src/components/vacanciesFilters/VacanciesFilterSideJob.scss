@@ -1,0 +1,133 @@
+.vacancy-filter-element{
+    margin:10px;
+    overflow: auto;
+    max-height:300px;
+}
+.vacancy-filter-line{
+    display: flex;
+    flex-direction:row;
+    input{
+        margin-right:10px;
+    }
+    span{
+        top:4px;
+    }
+    .vacancy-filter-text-hidden{
+        margin-left:10px;
+        width:auto;
+        color:#959799;
+        font-style:italic;
+    }
+    .checkbox{
+        display: none;
+    }
+    .checkbox:checked + .fake::before{
+        opacity: 1;
+    }
+    .checkbox:checked + .fake{
+        background: #1785e5;
+        border:1px #1785e5 solid;
+    }
+    .checkbox:disabled + .fake{
+        opacity:0.5;
+    }
+    .fake{
+        display: inline-block;
+        width:20px;
+        height:20px;
+        margin-right:5px;
+        border:1px grey solid;
+        border-radius:3px;
+        position:relative;
+        &::before{
+            content:"";
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+            width:10px;
+            height:10px;
+            background-size: contain;
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+            opacity:0;
+            transition: .2s;
+        }
+    }
+    .radio{
+        display: none;
+    }
+    .radio:checked + .fake-radio::before{
+        opacity: 1;
+    }
+    .radio:checked + .fake-radio{
+        background: #1785e5;
+        border:1px #1785e5 solid;
+    }
+    .radio:disabled + .fake-radio{
+        opacity:0.5;
+    }
+    .fake-radio{
+        display: inline-block;
+        width:20px;
+        height:20px;
+        margin-right:5px;
+        border:1px grey solid;
+        border-radius:50%;
+        position:relative;
+        &::before{
+            content:"";
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+            width:10px;
+            height:10px;
+            border-radius:50%;
+            background: white;
+            opacity:0;
+            transition: .2s;
+        }
+    }
+}
+.vacancy-filter-own-salary{
+    display: flex;
+    flex-direction: column;
+    max-width:400px;
+    input {
+        margin-right:10px;
+        text-align: center;
+        font-size:1.8rem;
+    }
+    #own-salary-input{
+        margin:5px auto;
+        width: calc(100% - 120px);
+        max-width:300px;
+    }
+    .own-salary-button{
+        margin:5px auto;
+        border-radius:5px;
+        font-size:1.7rem;
+        background-color:#1785e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:80px;
+        height:40px;
+        color:white;
+        &:hover{
+            opacity:0.7;
+        }
+        &:active{
+            opacity:0.4;
+        }
+    }
+    .vacancies-filter-salary-input{
+        display: flex;
+    }
+}
+.vacancies-own-salary{
+    height:40px;
+    border:1px solid black;
+    border-radius:5px;
+    margin-top:10px;
+}

@@ -1,0 +1,60 @@
+.vacancy-small-description{
+    position:relative;
+    box-shadow: 0 2px 12px #edeff0;
+    margin:20px;
+    a{
+        color:#3c9df2;
+    }
+    .vacancies-small-img{
+        position: absolute;
+        top:40px;
+        left:calc(100% - 220px);
+        width:200px;
+    }
+    h2{
+        padding-top:10px;
+        font-size:1.8rem;
+    }
+    h3{
+        font-size:1.8rem;
+    }
+    h2,h3,p,button{
+        margin-left:20px;
+        margin-top:10px;
+    }
+    p{
+        font-size:1.5rem;
+        width:calc(100% - 260px);
+    }
+    .vacancy-small-area{
+        margin-top:0px;
+    }
+    button{
+        background-color:#1785e5;
+        color:white;
+        border-radius:10px;
+        padding:10px;
+        margin-bottom:20px;
+    }
+    @media(max-width:1027px){
+        h3{
+            font-size:1.8rem;
+        }
+        .vacancies-small-img{
+            position:static;
+            width:150px;
+            margin:20px;
+        }
+        p{
+            font-size:1.5rem;
+            width:calc(100% - 20px);
+        }
+        button{
+            background-color:#1785e5;
+            color:white;
+            border-radius:10px;
+            font-size:1.5rem;
+            margin-bottom:20px;
+        }
+    }
+}

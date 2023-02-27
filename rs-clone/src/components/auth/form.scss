@@ -1,0 +1,72 @@
+.form {
+    display: flex;
+    flex-direction: column;
+
+    &:has(.form__password:invalid) > .form__btn {
+        pointer-events: none;
+        background-color: var(--red);
+        color: var(--white);
+    }
+
+    &:has(.form__email:invalid) > .form__btn {
+        pointer-events: none;
+        background-color: var(--red);
+        color: var(--white);
+    }
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+
+    &__box--pass:has(.form__password:not(:invalid)) > .form__text-valid {
+        display: none;
+    }
+
+    &__input {
+        border: 1px solid var(--gray);
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+    &__password,
+    &__email {
+        outline: transparent;
+
+        &:invalid {
+            border-color: var(--red);
+
+            &::placeholder {
+                color: var(--red);
+            }
+        }
+
+        &:valid {
+            border-color: var(--green);
+
+            &::placeholder {
+                color: var(--green);
+            }
+        }
+    }
+
+    &__text-valid {
+        display: block;
+        text-align: center;
+        font-size: 1.4rem;
+        opacity: 0.5;
+    }
+
+    &__btn {
+        user-select: none;
+        border: 1px solid var(--gray);
+        padding: 1rem 0;
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+
+        &:hover {
+            background-color: var(--blue-200);
+            color: var(--white);
+        }
+    }
+}
