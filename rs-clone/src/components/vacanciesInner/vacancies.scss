@@ -14,6 +14,11 @@
     margin-bottom: 1rem;
     flex: 1 1 60%;
 
+    @media (max-width: 576px) {
+        flex: 1 1 15%;
+        font-size: 1rem;
+    }
+
     &.active {
         opacity: 0.5;
         pointer-events: none;
@@ -91,6 +96,10 @@
 
         &::-webkit-scrollbar {
             width: 0;
+        }
+
+        @media (max-width: 576px) {
+            font-size: 1rem;
         }
     }
 
